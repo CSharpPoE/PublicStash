@@ -1,141 +1,142 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using PublicStash.Model;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using PublicStash.Model;
 
-//namespace PublicStash
-//{
-//    public class Example
-//    {
-//        public static void Main(string[] args)
-//        {
-//            var publicStash = API.GetLatestPublicStashAsync().Result;
-//            //var publicStash = API.GetPublicStashAsync("123241175-129034376-121043481-139470373-130405801").Result;
 
-//            var KnifeList = GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(publicStash);
-//            var BeltList = GetAllWhoHasPricedTheirStygianVise(publicStash);
-//            var CurrencyDict = GetAllCurrencyAndAddThemUp(publicStash);
-//            var MapList = GetInterestingMapsListedForLessOrEqualToFifteenChaos(publicStash);
-//        }
+namespace PublicStash
+{
+    public class Example
+    {
+        public static void Main(string[] args)
+        {
+            var publicStash = API.GetLatestPublicStashAsync().Result;
+            //var publicStash = API.GetPublicStashAsync("123241175-129034376-121043481-139470373-130405801").Result;
 
-//        private static List<(String, Gem)> GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(Model.PublicStash ps)
-//        {
-//            var list = new List<(String, Gem)>();
+            var KnifeList = GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(publicStash);
+            var BeltList = GetAllWhoHasPricedTheirStygianVise(publicStash);
+            var CurrencyDict = GetAllCurrencyAndAddThemUp(publicStash);
+            var MapList = GetInterestingMapsListedForLessOrEqualToFifteenChaos(publicStash);
+        }
 
-//            foreach (var stash in ps.stashes)
-//            {
-//                foreach (var item in stash.items)
-//                {
-//                    switch (item)
-//                    {
-//                        case Gem gem when item.GetType() == typeof(Gem):
-//                            if (gem.typeLine == "Ethereal Knives")
-//                            {
-//                                list.Add((stash.accountName, gem));
-//                            }
-//                            break;
-//                    }
-//                }
-//            }
+        private static List<(String, Gem)> GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(Model.PublicStash ps)
+        {
+            var list = new List<(String, Gem)>();
 
-//            return list;
-//        }
+            foreach ( var stash in ps.stashes )
+            {
+                foreach ( var item in stash.items )
+                {
+                    switch ( item )
+                    {
+                        case Gem gem when item.GetType() == typeof(Gem):
+                            if ( gem.typeLine == "Ethereal Knives" )
+                            {
+                                list.Add((stash.accountName, gem));
+                            }
+                            break;
+                    }
+                }
+            }
 
-//        private static List<(String, Belt)> GetAllWhoHasPricedTheirStygianVise(Model.PublicStash ps)
-//        {
-//            var list = new List<(String, Belt)>();
+            return list;
+        }
 
-//            foreach (var stash in ps.stashes)
-//            {
-//                foreach (var item in stash.items)
-//                {
-//                    switch (item)
-//                    {
-//                        case Belt belt when item.GetType() == typeof(Belt):
-//                            if (belt.typeLine == "Stygian Vise" &&
-//                                belt.note?.IndexOf("~") >= 0)
-//                            {
-//                                list.Add((stash.accountName, belt));
-//                            }
-//                            break;
-//                    }
-//                }
-//            }
+        private static List<(String, Belt)> GetAllWhoHasPricedTheirStygianVise(Model.PublicStash ps)
+        {
+            var list = new List<(String, Belt)>();
 
-//            return list;
-//        }
+            foreach ( var stash in ps.stashes )
+            {
+                foreach ( var item in stash.items )
+                {
+                    switch ( item )
+                    {
+                        case Belt belt when item.GetType() == typeof(Belt):
+                            if ( belt.typeLine == "Stygian Vise" &&
+                                belt.note?.IndexOf("~") >= 0 )
+                            {
+                                list.Add((stash.accountName, belt));
+                            }
+                            break;
+                    }
+                }
+            }
 
-//        public static Dictionary<String, int> GetAllCurrencyAndAddThemUp(Model.PublicStash ps)
-//        {
-//            var dict = new Dictionary<String, int>();
+            return list;
+        }
 
-//            foreach (var stash in ps.stashes)
-//            {
-//                foreach (var item in stash.items)
-//                {
-//                    switch (item)
-//                    {
-//                        case Currency currency when item.GetType() == typeof(Currency):
-//                            dict.TryGetValue(currency.typeLine, out var current);
-//                            current += currency.stackSize;
-//                            dict[currency.typeLine] = current;
+        public static Dictionary<String, int> GetAllCurrencyAndAddThemUp(Model.PublicStash ps)
+        {
+            var dict = new Dictionary<String, int>();
 
-//                            break;
-//                    }
-//                }
-//            }
+            foreach ( var stash in ps.stashes )
+            {
+                foreach ( var item in stash.items )
+                {
+                    switch ( item )
+                    {
+                        case Currency currency when item.GetType() == typeof(Currency):
+                            dict.TryGetValue(currency.typeLine, out var current);
+                            current += currency.stackSize;
+                            dict[currency.typeLine] = current;
 
-//            return dict;
-//        }
+                            break;
+                    }
+                }
+            }
 
-//        private static List<(String, Map)> GetInterestingMapsListedForLessOrEqualToFifteenChaos(Model.PublicStash ps)
-//        {
-//            var maps = new List<String>
-//            {
-//                "Scriptorium Map",
-//                "Shaped Scriptorium Map",
-//                "Vault Map",
-//                "Shaped Vault Map",
-//                "Shaped Spider Forest Map",
-//                "Shaped Arachnid Tomb Map",
-//            };
+            return dict;
+        }
 
-//            bool LessThenFiveC(String cond)
-//            {
-//                if (String.IsNullOrEmpty(cond)) return false;
+        private static List<(String, Map)> GetInterestingMapsListedForLessOrEqualToFifteenChaos(Model.PublicStash ps)
+        {
+            var maps = new List<String>
+            {
+                "Scriptorium Map",
+                "Shaped Scriptorium Map",
+                "Vault Map",
+                "Shaped Vault Map",
+                "Shaped Spider Forest Map",
+                "Shaped Arachnid Tomb Map",
+            };
 
-//                for (var i = 0; i < 15; i++)
-//                {
-//                    if (cond.IndexOf($"~price {i} chaos", StringComparison.Ordinal) >= 0 ||
-//                        cond.IndexOf($"~b/o {i} chaos", StringComparison.Ordinal) >= 0)
-//                    {
-//                        return true;
-//                    }
-//                }
+            bool LessThenFiveC(String cond)
+            {
+                if ( String.IsNullOrEmpty(cond) ) return false;
 
-//                return false;
-//            }
+                for ( var i = 0; i < 15; i++ )
+                {
+                    if ( cond.IndexOf($"~price {i} chaos", StringComparison.Ordinal) >= 0 ||
+                        cond.IndexOf($"~b/o {i} chaos", StringComparison.Ordinal) >= 0 )
+                    {
+                        return true;
+                    }
+                }
 
-//            var list = new List<(String, Map)>();
+                return false;
+            }
 
-//            foreach (var stash in ps.stashes)
-//            {
-//                foreach (var item in stash.items)
-//                {
-//                    switch (item)
-//                    {
-//                        case Map map when item.GetType() == typeof(Map):
-//                            if (maps.Any(m => map.typeLine.IndexOf(m, StringComparison.Ordinal) >= 0 &&
-//                                              LessThenFiveC(map.note)))
-//                            {
-//                                list.Add((stash.accountName, map));
-//                            }
-//                            break;
-//                    }
-//                }
-//            }
+            var list = new List<(String, Map)>();
 
-//            return list;
-//        }
-//    }
-//}
+            foreach ( var stash in ps.stashes )
+            {
+                foreach ( var item in stash.items )
+                {
+                    switch ( item )
+                    {
+                        case Map map when item.GetType() == typeof(Map):
+                            if ( maps.Any(m => map.typeLine.IndexOf(m, StringComparison.Ordinal) >= 0 &&
+                                               LessThenFiveC(map.note)) )
+                            {
+                                list.Add((stash.accountName, map));
+                            }
+                            break;
+                    }
+                }
+            }
+
+            return list;
+        }
+    }
+}

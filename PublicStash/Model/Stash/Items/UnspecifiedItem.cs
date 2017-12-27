@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PublicStash.Model
 {
-    internal class UnspecifiedItem : Item
+    public class UnspecifiedItem : Item
     {
         public bool verified { get; set; }
         public int w { get; set; }

@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{60E6F929-F4C6-48BB-8979-9A7E1B1F3A22}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>QuickPOE</RootNamespace>
-    <AssemblyName>QuickPOE</AssemblyName>
+    <RootNamespace>PublicStash</RootNamespace>
+    <AssemblyName>PublicStash</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

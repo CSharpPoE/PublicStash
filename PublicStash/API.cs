@@ -15,7 +15,7 @@ namespace PublicStash
             _client ?? (_client = new HttpClient());
     }
 
-    internal static class API
+    public static class API
     {
         /// <summary>
         /// The path of exile public stash url.

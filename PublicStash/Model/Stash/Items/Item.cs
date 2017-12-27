@@ -2,18 +2,16 @@
 
 namespace PublicStash.Model
 {
-
-
     public abstract class Item
     {
-        internal class Socket
+        public class Socket
         {
             public int group { get; set; }
             public string attr { get; set; }
             public string sColour { get; set; }
         }
 
-        internal class Property
+        public class Property
         {
             public string name { get; set; }
             public IEnumerable<IEnumerable<object>> values { get; set; }
@@ -29,7 +27,7 @@ namespace PublicStash.Model
             public int progress { get; set; }
         }
 
-        internal class Requirement
+        public class Requirement
         {
             public string name { get; set; }
             public IEnumerable<IEnumerable<object>> values { get; set; }

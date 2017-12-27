@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PublicStash.Model
 {
-    internal class Currency : Item
+    public class Currency : Item
     {
         public static readonly IEnumerable<String> BASES = new List<String>
         {

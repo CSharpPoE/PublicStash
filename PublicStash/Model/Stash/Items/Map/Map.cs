@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PublicStash.Model
 {
-    internal class Map : Item
+    public class Map : Item
     {
         public static readonly IEnumerable<String> BASES = new List<String>
         {

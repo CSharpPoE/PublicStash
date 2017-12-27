@@ -9,12 +9,12 @@ namespace PublicStash
 {
     class Program
     {
-        public static void Main(String[] args)
-        {
-            //Run();
-            //CheckForBugs();
-            //regex();
-        }
+        //public static void Main(String[] args)
+        //{
+        //    //Run();
+        //    //CheckForBugs();
+        //    //regex();
+        //}
 
         //public static void regex()
         //{

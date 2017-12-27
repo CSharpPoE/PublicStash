@@ -2,7 +2,7 @@
 
 namespace PublicStash.Model
 {
-    abstract class Weapon : Item
+    public abstract class Weapon : Item
     {
         public class Category
         {

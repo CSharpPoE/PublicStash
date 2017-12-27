@@ -1,6 +1,6 @@
 ﻿namespace PublicStash.Model
 {
-    internal class SocketableItem : Item
+    public class SocketableItem : Item
     {
     }
 }
