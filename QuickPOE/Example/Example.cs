@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using QuickPOE.Model;
+using PublicStash.Model;
 
-namespace QuickPOE
+namespace PublicStash
 {
     public class Example
     {
@@ -18,7 +18,7 @@ namespace QuickPOE
             var MapList = GetInterestingMapsListedForLessOrEqualToFifteenChaos(publicStash);
         }
 
-        private static List<(String, Gem)> GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(PublicStash ps)
+        private static List<(String, Gem)> GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(Model.PublicStash ps)
         {
             var list = new List<(String, Gem)>();
 
@@ -41,7 +41,7 @@ namespace QuickPOE
             return list;
         }
 
-        private static List<(String, Belt)> GetAllWhoHasPricedTheirStygianVise(PublicStash ps)
+        private static List<(String, Belt)> GetAllWhoHasPricedTheirStygianVise(Model.PublicStash ps)
         {
             var list = new List<(String, Belt)>();
 
@@ -65,7 +65,7 @@ namespace QuickPOE
             return list;
         }
 
-        public static Dictionary<String, int> GetAllCurrencyAndAddThemUp(PublicStash ps)
+        public static Dictionary<String, int> GetAllCurrencyAndAddThemUp(Model.PublicStash ps)
         {
             var dict = new Dictionary<String, int>();
 
@@ -88,7 +88,7 @@ namespace QuickPOE
             return dict;
         }
 
-        private static List<(String, Map)> GetInterestingMapsListedForLessOrEqualToFifteenChaos(PublicStash ps)
+        private static List<(String, Map)> GetInterestingMapsListedForLessOrEqualToFifteenChaos(Model.PublicStash ps)
         {
             var maps = new List<String>
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QuickPOE.Model
+namespace PublicStash.Model
 {
     internal class Blessing : AbstractItem
     {

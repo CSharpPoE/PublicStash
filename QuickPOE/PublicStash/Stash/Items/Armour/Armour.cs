@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace QuickPOE.Model
+namespace PublicStash.Model
 {
     abstract class Armour : AbstractItem
     {

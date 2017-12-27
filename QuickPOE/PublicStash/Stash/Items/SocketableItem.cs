@@ -1,4 +1,4 @@
-﻿namespace QuickPOE.Model
+﻿namespace PublicStash.Model
 {
     internal class SocketableItem : AbstractItem
     {

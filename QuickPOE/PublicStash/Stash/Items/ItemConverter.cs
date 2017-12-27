@@ -4,7 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace QuickPOE.Model
+namespace PublicStash.Model
 {
     internal class ItemConverter : JsonConverter
     {

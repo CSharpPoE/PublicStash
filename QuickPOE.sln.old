@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPOE", "QuickPOE\QuickPOE.csproj", "{60E6F929-F4C6-48BB-8979-9A7E1B1F3A22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60E6F929-F4C6-48BB-8979-9A7E1B1F3A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60E6F929-F4C6-48BB-8979-9A7E1B1F3A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60E6F929-F4C6-48BB-8979-9A7E1B1F3A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60E6F929-F4C6-48BB-8979-9A7E1B1F3A22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D54CA2C6-C281-4401-A3AF-CDCFE7471EC0}
+	EndGlobalSection
+EndGlobal
