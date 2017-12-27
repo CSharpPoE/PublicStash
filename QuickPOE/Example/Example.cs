@@ -12,7 +12,7 @@ namespace QuickPOE
             var publicStash = API.GetLatestPublicStashAsync().Result;
             //var publicStash = API.GetPublicStashAsync("123241175-129034376-121043481-139470373-130405801").Result;
 
-            var KniveList = GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(publicStash);
+            var KnifeList = GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(publicStash);
             var BeltList = GetAllWhoHasPricedTheirStygianVise(publicStash);
             var CurrencyDict = GetAllCurrencyAndAddThemUp(publicStash);
             var MapList = GetInterestingMapsListedForLessOrEqualToFifteenChaos(publicStash);
