@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{60E6F929-F4C6-48BB-8979-9A7E1B1F3A22}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>QuickPOE</RootNamespace>
+    <AssemblyName>QuickPOE</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\Stash\Items\Item.cs" />
+    <Compile Include="Model\Stash\Items\Armour\Armour.cs" />
+    <Compile Include="Model\Stash\Items\Armour\Body.cs" />
+    <Compile Include="Model\Stash\Items\Armour\Boots.cs" />
+    <Compile Include="Model\Stash\Items\Armour\Gloves.cs" />
+    <Compile Include="Model\Stash\Items\Armour\Helmet.cs" />
+    <Compile Include="Model\Stash\Items\Armour\Shield.cs" />
+    <Compile Include="Model\Stash\Items\UnspecifiedItem.cs" />
+    <Compile Include="Model\Stash\Items\Flask\Flask.cs" />
+    <Compile Include="Model\Stash\Items\Gem\Gem.cs" />
+    <Compile Include="Model\Stash\Items\ItemConverter.cs" />
+    <Compile Include="Model\Stash\Items\Jewellery\Amulet.cs" />
+    <Compile Include="Model\Stash\Items\Jewellery\Belt.cs" />
+    <Compile Include="Model\Stash\Items\Jewellery\Ring.cs" />
+    <Compile Include="Model\Stash\Items\Jewel\Jewel.cs" />
+    <Compile Include="Model\Stash\Items\Jewel\AbyssJewel.cs" />
+    <Compile Include="Model\Stash\Items\Valuable\Blessing.cs" />
+    <Compile Include="Model\Stash\Items\Map\Breachstone.cs" />
+    <Compile Include="Model\Stash\Items\Valuable\Essence.cs" />
+    <Compile Include="Model\Stash\Items\Valuable\AncientReliquaryKey.cs" />
+    <Compile Include="Model\Stash\Items\Map\Leaguestone.cs" />
+    <Compile Include="Model\Stash\Items\Valuable\Prophecy.cs" />
+    <Compile Include="Model\Stash\Items\Jewellery\Talisman.cs" />
+    <Compile Include="Model\Stash\Items\Map\Fragment.cs" />
+    <Compile Include="Model\Stash\Items\Map\Map.cs" />
+    <Compile Include="Model\Stash\Items\SocketableItem.cs" />
+    <Compile Include="Model\Stash\Items\Valuable\Currency.cs" />
+    <Compile Include="Model\Stash\Items\Valuable\Divination.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\Bow.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\Claw.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\Dagger.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\FishingRod.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\OneHandedAxe.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\OneHandedMace.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\OneHandedSword.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\Quiver.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\Sceptre.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\Staff.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\TwoHandedAxe.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\TwoHandedMace.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\TwoHandedSword.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\Wand.cs" />
+    <Compile Include="Model\Stash\Items\Weapon\Weapon.cs" />
+    <Compile Include="Model\PublicStash.cs" />
+    <Compile Include="Model\Stash\Stash.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
