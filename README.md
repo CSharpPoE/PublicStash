@@ -24,7 +24,7 @@ C# Json-Object mapping for Path of Exile's Public Stash API.
 
 ## Authors
 
-* **Sebastian de Rzewuski** - *Initial work* - [Razkan] (https://github.com/Razkan)
+* **Sebastian de Rzewuski** - *Initial work* - [Razkan](https://github.com/Razkan)
 
 ## License
 
@@ -32,5 +32,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* [Grinding Gear Games] (http://www.grindinggear.com) for making an awesome game!
+* [Grinding Gear Games](http://www.grindinggear.com) for making an awesome game!
 
