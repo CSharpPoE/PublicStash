@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PublicStash.Model;
+using PoEPublicStash;
+using PoEPublicStash.Model;
 
 
-namespace PublicStash
+namespace PublicStashTester
 {
     public class Example
     {
@@ -19,18 +20,18 @@ namespace PublicStash
             var MapList = GetInterestingMapsListedForLessOrEqualToFifteenChaos(publicStash);
         }
 
-        private static List<(String, Gem)> GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(Model.PublicStash ps)
+        private static List<(String, Gem)> GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(PublicStash ps)
         {
             var list = new List<(String, Gem)>();
 
-            foreach ( var stash in ps.stashes )
+            foreach (var stash in ps.stashes)
             {
-                foreach ( var item in stash.items )
+                foreach (var item in stash.items)
                 {
-                    switch ( item )
+                    switch (item)
                     {
                         case Gem gem when item.GetType() == typeof(Gem):
-                            if ( gem.typeLine == "Ethereal Knives" )
+                            if (gem.typeLine == "Ethereal Knives")
                             {
                                 list.Add((stash.accountName, gem));
                             }
@@ -42,19 +43,19 @@ namespace PublicStash
             return list;
         }
 
-        private static List<(String, Belt)> GetAllWhoHasPricedTheirStygianVise(Model.PublicStash ps)
+        private static List<(String, Belt)> GetAllWhoHasPricedTheirStygianVise(PublicStash ps)
         {
             var list = new List<(String, Belt)>();
 
-            foreach ( var stash in ps.stashes )
+            foreach (var stash in ps.stashes)
             {
-                foreach ( var item in stash.items )
+                foreach (var item in stash.items)
                 {
-                    switch ( item )
+                    switch (item)
                     {
                         case Belt belt when item.GetType() == typeof(Belt):
-                            if ( belt.typeLine == "Stygian Vise" &&
-                                belt.note?.IndexOf("~") >= 0 )
+                            if (belt.typeLine == "Stygian Vise" &&
+                                belt.note?.IndexOf("~") >= 0)
                             {
                                 list.Add((stash.accountName, belt));
                             }
@@ -66,15 +67,15 @@ namespace PublicStash
             return list;
         }
 
-        public static Dictionary<String, int> GetAllCurrencyAndAddThemUp(Model.PublicStash ps)
+        public static Dictionary<String, int> GetAllCurrencyAndAddThemUp(PublicStash ps)
         {
             var dict = new Dictionary<String, int>();
 
-            foreach ( var stash in ps.stashes )
+            foreach (var stash in ps.stashes)
             {
-                foreach ( var item in stash.items )
+                foreach (var item in stash.items)
                 {
-                    switch ( item )
+                    switch (item)
                     {
                         case Currency currency when item.GetType() == typeof(Currency):
                             dict.TryGetValue(currency.typeLine, out var current);
@@ -89,7 +90,7 @@ namespace PublicStash
             return dict;
         }
 
-        private static List<(String, Map)> GetInterestingMapsListedForLessOrEqualToFifteenChaos(Model.PublicStash ps)
+        private static List<(String, Map)> GetInterestingMapsListedForLessOrEqualToFifteenChaos(PublicStash ps)
         {
             var maps = new List<String>
             {
@@ -103,12 +104,12 @@ namespace PublicStash
 
             bool LessThenFiveC(String cond)
             {
-                if ( String.IsNullOrEmpty(cond) ) return false;
+                if (String.IsNullOrEmpty(cond)) return false;
 
-                for ( var i = 0; i < 15; i++ )
+                for (var i = 0; i < 15; i++)
                 {
-                    if ( cond.IndexOf($"~price {i} chaos", StringComparison.Ordinal) >= 0 ||
-                        cond.IndexOf($"~b/o {i} chaos", StringComparison.Ordinal) >= 0 )
+                    if (cond.IndexOf($"~price {i} chaos", StringComparison.Ordinal) >= 0 ||
+                        cond.IndexOf($"~b/o {i} chaos", StringComparison.Ordinal) >= 0)
                     {
                         return true;
                     }
@@ -119,15 +120,15 @@ namespace PublicStash
 
             var list = new List<(String, Map)>();
 
-            foreach ( var stash in ps.stashes )
+            foreach (var stash in ps.stashes)
             {
-                foreach ( var item in stash.items )
+                foreach (var item in stash.items)
                 {
-                    switch ( item )
+                    switch (item)
                     {
                         case Map map when item.GetType() == typeof(Map):
-                            if ( maps.Any(m => map.typeLine.IndexOf(m, StringComparison.Ordinal) >= 0 &&
-                                               LessThenFiveC(map.note)) )
+                            if (maps.Any(m => map.typeLine.IndexOf(m, StringComparison.Ordinal) >= 0 &&
+                                              LessThenFiveC(map.note)))
                             {
                                 list.Add((stash.accountName, map));
                             }

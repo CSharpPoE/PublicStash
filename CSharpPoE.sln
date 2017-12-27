@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicStash", "PublicStash\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicStashTester", "PublicStashTester\PublicStashTester.csproj", "{470DEE35-F03D-4299-8826-6188C252D2F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicStashExample", "PublicStashExample\PublicStashExample.csproj", "{33C54969-0A19-4462-988E-C3ED1D801E4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{470DEE35-F03D-4299-8826-6188C252D2F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{470DEE35-F03D-4299-8826-6188C252D2F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{470DEE35-F03D-4299-8826-6188C252D2F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C54969-0A19-4462-988E-C3ED1D801E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C54969-0A19-4462-988E-C3ED1D801E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C54969-0A19-4462-988E-C3ED1D801E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C54969-0A19-4462-988E-C3ED1D801E4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

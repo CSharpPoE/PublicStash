@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{470DEE35-F03D-4299-8826-6188C252D2F4}</ProjectGuid>
+    <ProjectGuid>{33C54969-0A19-4462-988E-C3ED1D801E4E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>PublicStashTester</RootNamespace>
-    <AssemblyName>PublicStashTester</AssemblyName>
+    <RootNamespace>PublicStashExample</RootNamespace>
+    <AssemblyName>PublicStashExample</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Example\Example.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

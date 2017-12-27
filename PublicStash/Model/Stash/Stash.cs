@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PublicStash.Model
+namespace PoEPublicStash.Model
 {
     public class Stash
     {

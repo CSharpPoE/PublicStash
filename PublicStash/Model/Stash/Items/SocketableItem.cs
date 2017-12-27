@@ -1,4 +1,4 @@
-﻿namespace PublicStash.Model
+﻿namespace PoEPublicStash.Model
 {
     public class SocketableItem : Item
     {

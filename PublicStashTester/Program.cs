@@ -1,20 +1,15 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Diagnostics;
 
-namespace PublicStash
+namespace PublicStashTester
 {
     class Program
     {
-        //public static void Main(String[] args)
-        //{
-        //    //Run();
-        //    //CheckForBugs();
-        //    //regex();
-        //}
+        public static void Main(String[] args)
+        {
+            //Run();
+            //CheckForBugs();
+            //regex();
+        }
 
         //public static void regex()
         //{

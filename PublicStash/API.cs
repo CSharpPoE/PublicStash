@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using PublicStash.Model;
+using PoEPublicStash.Model;
 
-namespace PublicStash
+namespace PoEPublicStash
 {
     internal class Handler
     {
@@ -46,8 +46,8 @@ namespace PublicStash
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static async Task<Model.PublicStash> GetPublicStashAsync(String id) =>
-            GetAsync<Model.PublicStash>(await Handler.INSTANCE.GetAsync($"{POE_API_PUBLIC_STASH_URL}?id={id}"))
+        public static async Task<PublicStash> GetPublicStashAsync(String id) =>
+            GetAsync<PublicStash>(await Handler.INSTANCE.GetAsync($"{POE_API_PUBLIC_STASH_URL}?id={id}"))
                 .Result;
 
 
@@ -55,7 +55,7 @@ namespace PublicStash
         /// Does a GET to the path of exile public stash api with the latest change id as the query
         /// </summary>
         /// <returns></returns>
-        public static async Task<Model.PublicStash> GetLatestPublicStashAsync() =>
+        public static async Task<PublicStash> GetLatestPublicStashAsync() =>
             await GetPublicStashAsync(await GetLatestStashIdAsync());
 
 

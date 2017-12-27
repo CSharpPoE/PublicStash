@@ -2,13 +2,13 @@
 <package >
   <metadata>
     <id>CSharpPoE.PublicStash</id>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <title>CSharpPoe.PublicStash</title>
     <authors>Sebastian de Rzewuski</authors>
     <owners>Sebastian de Rzewuski</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>C# Framework to work with Path of Exile's public API</description>
-    <releaseNotes>Updated protection level.</releaseNotes>
+    <releaseNotes>Updated namespace.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>PathOfExile Api PublicStash</tags>
   </metadata>

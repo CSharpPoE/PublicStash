@@ -4,7 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace PublicStash.Model
+namespace PoEPublicStash.Model
 {
     internal class ItemConverter : JsonConverter
     {
