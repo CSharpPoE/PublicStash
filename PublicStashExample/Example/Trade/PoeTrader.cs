@@ -43,7 +43,8 @@ namespace PublicStashExample.Example.Trade
                                         if (parsedString[0].Contains("/"))
                                         {
                                             var dividable = parsedString[0].Split('/');
-                                            var price = new Price(stash.accountName, curr.league,
+                                            var price = new Price(
+                                                new Seller(stash.accountName, stash.lastCharacterName, curr.league),
                                                 decimal.Divide(
                                                     decimal.Parse(dividable[1]),
                                                     decimal.Parse(dividable[0])),
@@ -55,11 +56,12 @@ namespace PublicStashExample.Example.Trade
                                         }
                                         else
                                         {
-                                            var price = new Price(stash.accountName, curr.league,
+                                            var price = new Price(
+                                                new Seller(stash.accountName, stash.lastCharacterName, curr.league),
                                                 decimal.Parse(parsedString[0]),
-                                                $"Selling 1 {curr.typeLine} for {parsedString[0]} {parsedString[1]}",
+                                                $"Selling {curr.stackSize} {curr.typeLine} for {int.Parse(parsedString[0]) * curr.stackSize} {parsedString[1]}",
                                                 matchedText[0],
-                                                new Sell(curr.typeLine, 1),
+                                                new Sell(curr.typeLine, curr.stackSize),
                                                 new Buy(parsedString[1], int.Parse(parsedString[0])));
                                             prices.Add(price);
                                         }
