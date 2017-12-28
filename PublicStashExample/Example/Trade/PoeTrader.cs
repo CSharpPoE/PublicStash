@@ -14,9 +14,7 @@ namespace PublicStashExample.Example.Trade
             "~b/o "
         };
 
-        private static readonly Type Currency = typeof(Currency);
-
-        public List<Price> GetPrice(PublicStash ps)
+        public IEnumerable<Price> GetPrice(PublicStash ps)
         {
             var prices = new List<Price>();
 
@@ -26,13 +24,14 @@ namespace PublicStashExample.Example.Trade
                 {
                     switch (item)
                     {
-                        case Currency curr when item.note != null && item.GetType() == Currency:
+                        case Currency curr when item.note != null && item.GetType() == typeof(Currency):
 
                             foreach (var query in matches)
                             {
                                 if (curr.note?.IndexOf(query) >= 0)
                                 {
-                                    var matchedText = Regex.Matches(curr.note, $@"^{query}[0-9//]+ [\w]+").Cast<Match>()
+                                    var matchedText = Regex.Matches(curr.note, $@"^{query}[0-9//]+ [\w-]+")
+                                        .Cast<Match>()
                                         .Select(m => m.Value)
                                         .ToArray();
 
@@ -42,16 +41,16 @@ namespace PublicStashExample.Example.Trade
 
                                         if (parsedString[0].Contains("/"))
                                         {
-                                            var dividable = parsedString[0].Split('/');
+                                            var decimalPrice = parsedString[0].Split('/');
                                             var price = new Price(
                                                 new Seller(stash.accountName, stash.lastCharacterName, curr.league),
                                                 decimal.Divide(
-                                                    decimal.Parse(dividable[1]),
-                                                    decimal.Parse(dividable[0])),
-                                                $"Selling {dividable[1]} {curr.typeLine} for {dividable[0]} {parsedString[1]}",
+                                                    decimal.Parse(decimalPrice[1]),
+                                                    decimal.Parse(decimalPrice[0])),
+                                                $"Selling {decimalPrice[1]} {curr.typeLine} for {decimalPrice[0]} {parsedString[1]}",
                                                 matchedText[0],
-                                                new Sell(curr.typeLine, int.Parse(dividable[1])),
-                                                new Buy(parsedString[1], int.Parse(dividable[0])));
+                                                new Sell(curr.typeLine, int.Parse(decimalPrice[1])),
+                                                new Buy(parsedString[1], int.Parse(decimalPrice[0])));
                                             prices.Add(price);
                                         }
                                         else
