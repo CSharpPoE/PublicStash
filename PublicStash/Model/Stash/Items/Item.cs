@@ -4,6 +4,9 @@ namespace PoEPublicStash.Model
 {
     public abstract class Item
     {
+        public string note { get; set; }
+        public string typeLine { get; set; }
+
         public class Socket
         {
             public int group { get; set; }

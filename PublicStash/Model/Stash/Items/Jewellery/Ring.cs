@@ -45,8 +45,6 @@ namespace PoEPublicStash.Model
         public string id { get; set; }
         public bool elder { get; set; }
         public string name { get; set; }
-        public string note { get; set; }
-        public string typeLine { get; set; }
         public bool identified { get; set; }
         public IEnumerable<Requirement> requirements { get; set; }
         public IEnumerable<string> implicitMods { get; set; }

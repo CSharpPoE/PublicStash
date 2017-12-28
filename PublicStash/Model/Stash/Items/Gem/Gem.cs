@@ -319,9 +319,7 @@ namespace PoEPublicStash.Model
         public string league { get; set; }
         public string id { get; set; }
         public string name { get; set; }
-        public string typeLine { get; set; }
         public bool identified { get; set; }
-        public string note { get; set; }
         public IEnumerable<Property> properties { get; set; }
         public IEnumerable<AdditionalProperty> additionalProperties { get; set; }
         public IEnumerable<Requirement> requirements { get; set; }

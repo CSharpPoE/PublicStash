@@ -18,7 +18,6 @@ namespace PoEPublicStash.Model
 
         public IEnumerable<Socket> sockets { get; set; }
         public String name { get; set; }
-        public String typeLine { get; set; }
         public bool identified { get; set; }
         public bool corrupted { get; set; }
         public bool lockedToCharacter { get; set; }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using PoEPublicStash;
 using PoEPublicStash.Model;
+using PublicStashExample.Example.Trade;
+using Currency = PoEPublicStash.Model.Currency;
 
 
 namespace PublicStashTester
@@ -12,8 +14,14 @@ namespace PublicStashTester
         public static void Main(string[] args)
         {
             var publicStash = API.GetLatestPublicStashAsync().Result;
-            //var publicStash = API.GetPublicStashAsync("123241175-129034376-121043481-139470373-130405801").Result;
+            var trader = new PoeTrader();
+            var prices = trader.GetPrice(publicStash);
 
+            //FunSmallExamples(publicStash);
+        }
+
+        private static void FunSmallExamples(PublicStash publicStash)
+        {
             var KnifeList = GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(publicStash);
             var BeltList = GetAllWhoHasPricedTheirStygianVise(publicStash);
             var CurrencyDict = GetAllCurrencyAndAddThemUp(publicStash);
