@@ -3,7 +3,7 @@ using PoEPublicStash.Model;
 
 namespace PublicStashExample.Example.Trade
 {
-    class Price
+    public class Price
     {
         public Seller Seller { get; set; }
         public Buy Buying { get; set; }
@@ -25,10 +25,10 @@ namespace PublicStashExample.Example.Trade
         }
     }
 
-    class Seller
+    public class Seller
     {
         public String Account { get; set; }
-        public String LastKnownCharacter{ get; set; }
+        public String LastKnownCharacter { get; set; }
         public String League { get; set; }
 
         public Seller(String account, String lastKnownCharacter, String league)
@@ -37,30 +37,34 @@ namespace PublicStashExample.Example.Trade
             LastKnownCharacter = lastKnownCharacter;
             League = league;
         }
-
     }
 
-    class Buy
+    public class Sell
     {
-        public String Buying { get; set; }
-        public int Amount { get; set; }
+        public Currency Currency { get; set; }
+        public String Texted { get; set; }
+        public int Stock { get; set; }
 
-        public Buy(String buying, int amount)
+        public Sell(String currency, int stock)
         {
-            Buying = buying;
-            Amount = amount;
+            Currency = Currency.Parse(currency);
+            Texted = currency;
+            Stock = stock;
         }
     }
 
-    class Sell
-    {
-        public String Selling { get; set; }
-        public int Stock { get; set; }
 
-        public Sell(String selling, int stock)
+    public class Buy
+    {
+        public Currency Currency { get; set; }
+        public String Texted { get; set; }
+        public int Amount { get; set; }
+
+        public Buy(String currency, int amount)
         {
-            Selling = selling;
-            Stock = stock;
+            Currency = Currency.Parse(currency);
+            Texted = currency;
+            Amount = amount;
         }
     }
 }

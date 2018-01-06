@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using PoEPublicStash;
 using PoEPublicStash.Model;
 using PublicStashExample.Example.Trade;
@@ -14,10 +15,28 @@ namespace PublicStashTester
         public static void Main(string[] args)
         {
             var publicStash = API.GetLatestPublicStashAsync().Result;
-            var trader = new PoeTrader();
-            var prices = trader.GetPrice(publicStash);
-
+            RunTrader(publicStash, publicStash.next_change_id, new PoeTrader());
             //FunSmallExamples(publicStash);
+        }
+
+        private static void RunTrader(PublicStash publicStash, String nextChangeId, PoeTrader trader)
+        {
+            var missing = new List<Price>();
+
+            var iteration = 0;
+
+            for (;;)
+            {
+                var prices = trader.GetCurrencyListings(publicStash);
+                missing.AddRange(prices.Where(e => e.Buying.Currency == PublicStashExample.Example.Trade.Currency.MISSING_TYPE).ToList());
+
+                Thread.Sleep(5000);
+
+                publicStash = API.GetPublicStashAsync(nextChangeId).Result;
+                nextChangeId = publicStash.next_change_id;
+                iteration++;
+            }
+
         }
 
         private static void FunSmallExamples(PublicStash publicStash)

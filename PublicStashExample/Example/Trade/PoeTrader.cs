@@ -6,7 +6,7 @@ using PoEPublicStash.Model;
 
 namespace PublicStashExample.Example.Trade
 {
-    class PoeTrader
+    public class PoeTrader
     {
         private static readonly IEnumerable<String> matches = new List<String>
         {
@@ -14,7 +14,7 @@ namespace PublicStashExample.Example.Trade
             "~b/o "
         };
 
-        public IEnumerable<Price> GetPrice(PublicStash ps)
+        public IEnumerable<Price> GetCurrencyListings(PublicStash ps)
         {
             var prices = new List<Price>();
 
@@ -24,7 +24,9 @@ namespace PublicStashExample.Example.Trade
                 {
                     switch (item)
                     {
-                        case Currency curr when item.note != null && item.GetType() == typeof(Currency):
+                        case PoEPublicStash.Model.Currency curr when item.note != null &&
+                                                                     item.GetType() ==
+                                                                     typeof(PoEPublicStash.Model.Currency):
 
                             foreach (var query in matches)
                             {
@@ -37,31 +39,37 @@ namespace PublicStashExample.Example.Trade
 
                                     if (matchedText.Length == 1)
                                     {
-                                        var parsedString = ParseString(query, matchedText[0]);
+                                        var parsedCurrency = ParseCurrency(query, matchedText[0]);
 
-                                        if (parsedString[0].Contains("/"))
+                                        if (parsedCurrency[0].Contains("/"))
                                         {
-                                            var decimalPrice = parsedString[0].Split('/');
+                                            var decimalPrice = parsedCurrency[0].Split('/');
+
+                                            // Missing value "/X" or "X/"
+                                            if (String.IsNullOrEmpty(decimalPrice[0]) ||
+                                                String.IsNullOrEmpty(decimalPrice[1])) break;
+
                                             var price = new Price(
                                                 new Seller(stash.accountName, stash.lastCharacterName, curr.league),
                                                 decimal.Divide(
                                                     decimal.Parse(decimalPrice[1]),
                                                     decimal.Parse(decimalPrice[0])),
-                                                $"Selling {decimalPrice[1]} {curr.typeLine} for {decimalPrice[0]} {parsedString[1]}",
+                                                $"Selling {decimalPrice[1]} {curr.typeLine} for {decimalPrice[0]} {parsedCurrency[1]}",
                                                 matchedText[0],
                                                 new Sell(curr.typeLine, int.Parse(decimalPrice[1])),
-                                                new Buy(parsedString[1], int.Parse(decimalPrice[0])));
+                                                new Buy(parsedCurrency[1], int.Parse(decimalPrice[0])));
                                             prices.Add(price);
                                         }
                                         else
                                         {
                                             var price = new Price(
                                                 new Seller(stash.accountName, stash.lastCharacterName, curr.league),
-                                                decimal.Parse(parsedString[0]),
-                                                $"Selling {curr.stackSize} {curr.typeLine} for {int.Parse(parsedString[0]) * curr.stackSize} {parsedString[1]}",
+                                                decimal.Parse(parsedCurrency[0]),
+                                                $"Selling {curr.stackSize} {curr.typeLine} for {int.Parse(parsedCurrency[0]) * curr.stackSize} {parsedCurrency[1]}",
                                                 matchedText[0],
                                                 new Sell(curr.typeLine, curr.stackSize),
-                                                new Buy(parsedString[1], int.Parse(parsedString[0])));
+                                                new Buy(parsedCurrency[1],
+                                                    curr.stackSize * int.Parse(parsedCurrency[0])));
                                             prices.Add(price);
                                         }
                                     }
@@ -75,6 +83,6 @@ namespace PublicStashExample.Example.Trade
             return prices;
         }
 
-        private static string[] ParseString(String replace, String value) => value.Replace(replace, "").Split(null);
+        private static string[] ParseCurrency(String replace, String value) => value.Replace(replace, "").Split(null);
     }
 }
