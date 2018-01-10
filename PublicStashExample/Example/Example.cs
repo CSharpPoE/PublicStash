@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using PoEPublicStash;
@@ -14,29 +15,53 @@ namespace PublicStashTester
     {
         public static void Main(string[] args)
         {
-            var publicStash = API.GetLatestPublicStashAsync().Result;
-            RunTrader(publicStash, publicStash.next_change_id, new PoeTrader());
+            RunTrader();
             //FunSmallExamples(publicStash);
         }
 
-        private static void RunTrader(PublicStash publicStash, String nextChangeId, PoeTrader trader)
+        private static void RunTrader()
         {
-            var missing = new List<Price>();
-
             var iteration = 0;
+
+            var publicStash = API.GetLatestPublicStashAsync().Result;
+            var nextChangeId = publicStash.next_change_id;
+            var cachedChangeId = "";
+            var trader = new PoeTrader();
 
             for (;;)
             {
-                var prices = trader.GetCurrencyListings(publicStash);
-                missing.AddRange(prices.Where(e => e.Buying.Currency == PublicStashExample.Example.Trade.Currency.MISSING_TYPE).ToList());
+                if (cachedChangeId != nextChangeId)
+                {
+                    var prices = trader.GetCurrencyListings(publicStash);
+                    //missing.AddRange(prices.Where(e => e.Buying.Currency == PublicStashExample.Example.Trade.Currency.MISSING_TYPE).ToList
+                    iteration++;
 
-                Thread.Sleep(5000);
+                    var lines = File.ReadAllLines("C:/tmp/poe/err.txt");
+                    var tmp =
+                    (from missing in prices.Where(e =>
+                            e.Buying.Currency == PublicStashExample.Example.Trade.Currency.MISSING_TYPE)
+                        where !lines.Contains(missing.Buying.Texted)
+                        select missing.Buying.Texted).ToList();
 
-                publicStash = API.GetPublicStashAsync(nextChangeId).Result;
-                nextChangeId = publicStash.next_change_id;
-                iteration++;
+                    if (tmp.Contains("port"))
+                    {
+                        
+                    }
+
+                    if (tmp.Any())
+                    {
+                        File.AppendAllLines("C:/tmp/poe/err.txt", new HashSet<String>(tmp));
+                    }
+
+                    cachedChangeId = nextChangeId;
+                }
+                else
+                {
+                    publicStash = API.GetPublicStashAsync(nextChangeId).Result;
+                    nextChangeId = publicStash.next_change_id;
+                    Thread.Sleep(5000);
+                }
             }
-
         }
 
         private static void FunSmallExamples(PublicStash publicStash)

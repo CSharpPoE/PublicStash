@@ -49,6 +49,11 @@ namespace PublicStashExample.Example.Trade
                                             if (String.IsNullOrEmpty(decimalPrice[0]) ||
                                                 String.IsNullOrEmpty(decimalPrice[1])) break;
 
+                                            // Missing value "/X" or "X/"
+                                            if (int.Parse(decimalPrice[0]) == 0 ||
+                                                int.Parse(decimalPrice[1]) == 0) break;
+
+
                                             var price = new Price(
                                                 new Seller(stash.accountName, stash.lastCharacterName, curr.league),
                                                 decimal.Divide(
