@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
     public class AbyssJewel : SocketableItem
     {
@@ -26,17 +26,16 @@ namespace PoEPublicStash.Model
         public string league { get; set; }
         public string id { get; set; }
         public bool abyss { get; set; }
-        public string name { get; set; }
         public bool identified { get; set; }
         public IEnumerable<Property> properties { get; set; }
         public IEnumerable<Requirement> requirements { get; set; }
         public IEnumerable<string> explicitMods { get; set; }
         public string descrText { get; set; }
         public int frameType { get; set; }
-        public Category category { get; set; }
         public int x { get; set; }
         public int y { get; set; }
         public string inventoryId { get; set; }
+        public Category category { get; set; }
 
     }
 }

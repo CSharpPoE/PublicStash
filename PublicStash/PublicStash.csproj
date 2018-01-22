@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{60E6F929-F4C6-48BB-8979-9A7E1B1F3A22}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>PoEPublicStash</RootNamespace>
-    <AssemblyName>PublicStash</AssemblyName>
+    <RootNamespace>PathOfExile</RootNamespace>
+    <AssemblyName>PathOfExile</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,11 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API.cs" />
+    <Compile Include="PublicStashAPI.cs" />
+    <Compile Include="Model\Stash\Items\Currency\Piece.cs" />
+    <Compile Include="Model\Stash\Items\SockatableConverter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Stash\Items\Item.cs" />
     <Compile Include="Model\Stash\Items\Armour\Armour.cs" />
-    <Compile Include="Model\Stash\Items\Armour\Body.cs" />
+    <Compile Include="Model\Stash\Items\Armour\Chest.cs" />
     <Compile Include="Model\Stash\Items\Armour\Boots.cs" />
     <Compile Include="Model\Stash\Items\Armour\Gloves.cs" />
     <Compile Include="Model\Stash\Items\Armour\Helmet.cs" />
@@ -63,23 +66,23 @@
     <Compile Include="Model\Stash\Items\Flask\Flask.cs" />
     <Compile Include="Model\Stash\Items\Gem\Gem.cs" />
     <Compile Include="Model\Stash\Items\ItemConverter.cs" />
-    <Compile Include="Model\Stash\Items\Jewellery\Amulet.cs" />
-    <Compile Include="Model\Stash\Items\Jewellery\Belt.cs" />
-    <Compile Include="Model\Stash\Items\Jewellery\Ring.cs" />
+    <Compile Include="Model\Stash\Items\Accessories\Amulet.cs" />
+    <Compile Include="Model\Stash\Items\Accessories\Belt.cs" />
+    <Compile Include="Model\Stash\Items\Accessories\Ring.cs" />
     <Compile Include="Model\Stash\Items\Jewel\Jewel.cs" />
     <Compile Include="Model\Stash\Items\Jewel\AbyssJewel.cs" />
-    <Compile Include="Model\Stash\Items\Valuable\Blessing.cs" />
+    <Compile Include="Model\Stash\Items\Currency\Blessing.cs" />
     <Compile Include="Model\Stash\Items\Map\Breachstone.cs" />
-    <Compile Include="Model\Stash\Items\Valuable\Essence.cs" />
-    <Compile Include="Model\Stash\Items\Valuable\AncientReliquaryKey.cs" />
+    <Compile Include="Model\Stash\Items\Currency\Essence.cs" />
+    <Compile Include="Model\Stash\Items\Currency\AncientReliquaryKey.cs" />
     <Compile Include="Model\Stash\Items\Map\Leaguestone.cs" />
-    <Compile Include="Model\Stash\Items\Valuable\Prophecy.cs" />
-    <Compile Include="Model\Stash\Items\Jewellery\Talisman.cs" />
+    <Compile Include="Model\Stash\Items\Currency\Prophecy.cs" />
+    <Compile Include="Model\Stash\Items\Accessories\Talisman.cs" />
     <Compile Include="Model\Stash\Items\Map\Fragment.cs" />
     <Compile Include="Model\Stash\Items\Map\Map.cs" />
     <Compile Include="Model\Stash\Items\SocketableItem.cs" />
-    <Compile Include="Model\Stash\Items\Valuable\Currency.cs" />
-    <Compile Include="Model\Stash\Items\Valuable\Divination.cs" />
+    <Compile Include="Model\Stash\Items\Currency\Currency.cs" />
+    <Compile Include="Model\Stash\Items\Currency\Divination.cs" />
     <Compile Include="Model\Stash\Items\Weapon\Bow.cs" />
     <Compile Include="Model\Stash\Items\Weapon\Claw.cs" />
     <Compile Include="Model\Stash\Items\Weapon\Dagger.cs" />
@@ -87,7 +90,7 @@
     <Compile Include="Model\Stash\Items\Weapon\OneHandedAxe.cs" />
     <Compile Include="Model\Stash\Items\Weapon\OneHandedMace.cs" />
     <Compile Include="Model\Stash\Items\Weapon\OneHandedSword.cs" />
-    <Compile Include="Model\Stash\Items\Weapon\Quiver.cs" />
+    <Compile Include="Model\Stash\Items\Armour\Quiver.cs" />
     <Compile Include="Model\Stash\Items\Weapon\Sceptre.cs" />
     <Compile Include="Model\Stash\Items\Weapon\Staff.cs" />
     <Compile Include="Model\Stash\Items\Weapon\TwoHandedAxe.cs" />

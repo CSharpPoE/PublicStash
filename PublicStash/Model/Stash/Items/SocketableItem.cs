@@ -1,4 +1,4 @@
-﻿namespace PoEPublicStash.Model
+﻿namespace PathOfExile.Model
 {
     public class SocketableItem : Item
     {

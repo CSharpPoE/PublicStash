@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using static Newtonsoft.Json.NullValueHandling;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
     public class UnspecifiedItem : Item
     {
@@ -17,7 +19,6 @@ namespace PoEPublicStash.Model
         public string inventoryId { get; set; }
 
         public IEnumerable<Socket> sockets { get; set; }
-        public String name { get; set; }
         public bool identified { get; set; }
         public bool corrupted { get; set; }
         public bool lockedToCharacter { get; set; }
@@ -31,7 +32,9 @@ namespace PoEPublicStash.Model
         public IEnumerable<String> flavourText { get; set; }
         public int frameType { get; set; }
 
+        [JsonProperty(NullValueHandling = Ignore), JsonConverter(typeof(SockatableConverter))]
         public IEnumerable<SocketableItem> socketedItems { get; set; }
+
         public IEnumerable<Property> additionalProperties { get; set; }
 
         public bool duplicated { get; set; }

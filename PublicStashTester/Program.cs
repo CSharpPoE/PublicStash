@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
+using PoEPublicStash;
 
 namespace PublicStashTester
 {
@@ -6,9 +9,27 @@ namespace PublicStashTester
     {
         public static void Main(String[] args)
         {
-            //Run();
+            Run();
             //CheckForBugs();
             //regex();
+        }
+
+        public static void Run()
+        {
+            for (;;)
+            {
+                var id = API.GetLatestStashIdAsync().Result;
+                //var g = API.GetPublicStashAsync("121928813-127692069-119776199-138031744-129023880").Result;
+                var g = API.GetPublicStashAsync(id).Result;
+
+                var list = (from stash in g.stashes from item in stash.items where item != null select item).ToList();
+
+                if (list.Any())
+                {
+                }
+
+                Thread.Sleep(10000);
+            }
         }
 
         //public static void regex()
@@ -26,23 +47,6 @@ namespace PublicStashTester
         //    File.WriteAllLines("C:\\tmp\\poe\\test.txt", newres);
         //}
 
-        //public static void Run()
-        //{
-        //    for (; ; )
-        //    {
-        //        var id = API.GetLatestStashIdAsync().Result;
-        //        //var g = API.GetPublicStashAsync("121928813-127692069-119776199-138031744-129023880").Result;
-        //        var g = API.GetPublicStashAsync(id).Result;
-
-        //        var list = (from stash in g.stashes from item in stash.items where item != null select item).ToList();
-
-        //        if ( list.Any() )
-        //        {
-        //        }
-
-        //        Thread.Sleep(10000);
-        //    }
-        //}
 
         //public static void CheckForBugs()
         //{

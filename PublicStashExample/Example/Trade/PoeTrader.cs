@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using PoEPublicStash.Model;
+using PathOfExile.Model;
+using PoECurrency = PathOfExile.Model.Currency;
 
 namespace PublicStashExample.Example.Trade
 {
@@ -24,9 +25,9 @@ namespace PublicStashExample.Example.Trade
                 {
                     switch (item)
                     {
-                        case PoEPublicStash.Model.Currency curr when item.note != null &&
-                                                                     item.GetType() ==
-                                                                     typeof(PoEPublicStash.Model.Currency):
+                        case PoECurrency curr when item.note != null &&
+                                                   item.GetType() ==
+                                                   typeof(PoECurrency):
 
                             foreach (var query in matches)
                             {

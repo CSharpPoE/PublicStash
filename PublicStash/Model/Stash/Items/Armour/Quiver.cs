@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
-    public class Quiver : Weapon
+    public class Quiver : Armour
     {
         public static readonly IEnumerable<String> BASES = new List<String>
         {

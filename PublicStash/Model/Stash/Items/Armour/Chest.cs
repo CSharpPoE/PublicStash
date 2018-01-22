@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
-    public class Body : Armour
+    public class Chest : Armour
     {
         public static readonly IEnumerable<String> BASES = new List<String>
         {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
     public class Talisman : Item
     {
@@ -52,16 +52,16 @@ namespace PoEPublicStash.Model
         public string icon { get; set; }
         public string league { get; set; }
         public string id { get; set; }
-        public string name { get; set; }
         public bool identified { get; set; }
         public IEnumerable<Requirement> requirements { get; set; }
         public IEnumerable<string> implicitMods { get; set; }
         public IEnumerable<string> explicitMods { get; set; }
         public IEnumerable<string> flavourText { get; set; }
         public int frameType { get; set; }
-        public Category category { get; set; }
         public int x { get; set; }
         public int y { get; set; }
         public string inventoryId { get; set; }
+        public Category category { get; set; }
+
     }
 }

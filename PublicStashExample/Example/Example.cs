@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using PoEPublicStash;
-using PoEPublicStash.Model;
+using PathOfExile;
+using PathOfExile.Model;
 using PublicStashExample.Example.Trade;
-using Currency = PoEPublicStash.Model.Currency;
+using Currency = PathOfExile.Model.Currency;
 
 
 namespace PublicStashTester
@@ -15,15 +15,108 @@ namespace PublicStashTester
     {
         public static void Main(string[] args)
         {
-            RunTrader();
+            GatherSocketableItems();
+            //RunTrader();
             //FunSmallExamples(publicStash);
+            //Run(new List<Action> {RunTrader, GatherSocketableItems});
+        }
+
+        public static void Run(List<Action> actions, int delay = 10000)
+        {
+            var iteration = 0;
+            var publicStash = PublicStashAPI.GetAsync().Result;
+            var nextChangeId = publicStash.next_change_id;
+            var cachedChangeId = "";
+
+            for (;;)
+            {
+                if (cachedChangeId != nextChangeId)
+                {
+                    foreach (var action in actions) action();
+
+                    iteration += 1;
+                    cachedChangeId = nextChangeId;
+                }
+                else
+                {
+                    publicStash = PublicStashAPI.GetAsync(nextChangeId).Result;
+                    nextChangeId = publicStash.next_change_id;
+                    Thread.Sleep(delay);
+                }
+            }
+        }
+
+        private static void GatherSocketableItems()
+        {
+            var iteration = 0;
+
+            var publicStash = PublicStashAPI.GetAsync().Result;
+            var nextChangeId = publicStash.next_change_id;
+            var cachedChangeId = "";
+
+            var armours = new List<(Armour, String)>();
+            var weapons = new List<(Weapon, String)>();
+            var unspecified = new List<(UnspecifiedItem, String)>();
+
+            for (;;)
+            {
+                if (armours.Any() || weapons.Any() || unspecified.Any())
+                {
+                }
+
+                if (cachedChangeId != nextChangeId)
+                {
+                    //missing.AddRange(prices.Where(e => e.Buying.Currency == PublicStashExample.Example.Trade.Currency.MISSING_TYPE).ToList
+
+                    //(from missing in prices.Where(e =>
+                    //        e.Buying.Currency == PublicStashExample.Example.Trade.Currency.MISSING_TYPE)
+                    //    where !lines.Contains(missing.Buying.Texted)
+                    //    select missing.Buying.Texted).ToList();
+
+                    foreach (var stash in publicStash.stashes)
+                    {
+                        foreach (var item in stash.items)
+                        {
+                            var type = item.GetType();
+                            if (type == typeof(Armour))
+                            {
+                                var a = (Armour) item;
+
+                                if (a.socketedItems.Any()) armours.Add((a, cachedChangeId));
+                            }
+                            else if (type == typeof(Weapon))
+                            {
+                                var w = (Weapon) item;
+
+                                if (w.socketedItems.Any()) weapons.Add((w, cachedChangeId));
+                            }
+                            else if (type == typeof(UnspecifiedItem))
+                            {
+                                var lines = File.ReadAllLines("C:/tmp/poe/missItem.txt");
+                                unspecified.Add(((UnspecifiedItem) item, cachedChangeId));
+                                File.AppendAllLines("C:/tmp/poe/missItem.txt",
+                                    new[] {$"{item.typeLine} - {cachedChangeId}"});
+                            }
+                        }
+                    }
+
+                    iteration++;
+                    cachedChangeId = nextChangeId;
+                }
+                else
+                {
+                    publicStash = PublicStashAPI.GetAsync(nextChangeId).Result;
+                    nextChangeId = publicStash.next_change_id;
+                    Thread.Sleep(10000);
+                }
+            }
         }
 
         private static void RunTrader()
         {
             var iteration = 0;
 
-            var publicStash = API.GetLatestPublicStashAsync().Result;
+            var publicStash = PublicStashAPI.GetAsync().Result;
             var nextChangeId = publicStash.next_change_id;
             var cachedChangeId = "";
             var trader = new PoeTrader();
@@ -45,7 +138,6 @@ namespace PublicStashTester
 
                     if (tmp.Contains("port"))
                     {
-                        
                     }
 
                     if (tmp.Any())
@@ -57,7 +149,7 @@ namespace PublicStashTester
                 }
                 else
                 {
-                    publicStash = API.GetPublicStashAsync(nextChangeId).Result;
+                    publicStash = PublicStashAPI.GetAsync(nextChangeId).Result;
                     nextChangeId = publicStash.next_change_id;
                     Thread.Sleep(5000);
                 }

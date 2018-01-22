@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
     public class Breachstone : Item
     {
@@ -21,13 +21,12 @@ namespace PoEPublicStash.Model
         public string icon { get; set; }
         public string league { get; set; }
         public string id { get; set; }
-        public string name { get; set; }
         public bool identified { get; set; }
         public string descrText { get; set; }
         public int frameType { get; set; }
-        public string category { get; set; }
         public int x { get; set; }
         public int y { get; set; }
         public string inventoryId { get; set; }
+        public string category { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
     public class Divination : Item
     {
@@ -73,7 +73,7 @@ namespace PoEPublicStash.Model
             "The Battle Born",
             "The Betrayal",
             "The Blazing Fire",
-            "The Body",
+            "The Chest",
             "The Brittle Emperor",
             "The Calling",
             "The Carrion Crow",
@@ -206,7 +206,6 @@ namespace PoEPublicStash.Model
         public string icon { get; set; }
         public string league { get; set; }
         public string id { get; set; }
-        public string name { get; set; }
         public bool identified { get; set; }
         public IEnumerable<Property> properties { get; set; }
         public IEnumerable<string> explicitMods { get; set; }

@@ -1,5 +1,4 @@
 ﻿using System;
-using PoEPublicStash.Model;
 
 namespace PublicStashExample.Example.Trade
 {

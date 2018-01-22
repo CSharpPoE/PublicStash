@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace PathOfExile.Model
 {
-    public abstract class Weapon : Item
+    public class Piece : Item
     {
         public class Category
         {
-            public IEnumerable<string> weapons { get; set; }
+            public List<string> currency { get; set; }
         }
 
         public bool verified { get; set; }
@@ -17,19 +16,12 @@ namespace PathOfExile.Model
         public string icon { get; set; }
         public string league { get; set; }
         public string id { get; set; }
-        public IEnumerable<Socket> sockets { get; set; }
         public bool identified { get; set; }
-        public IEnumerable<Property> properties { get; set; }
-        public IEnumerable<Requirement> requirements { get; set; }
-        public IEnumerable<string> explicitMods { get; set; }
-        public IEnumerable<string> flavourText { get; set; }
+        public string descrText { get; set; }
         public int frameType { get; set; }
+        public Category category { get; set; }
         public int x { get; set; }
         public int y { get; set; }
         public string inventoryId { get; set; }
-        public Category category { get; set; }
-
-        [JsonConverter(typeof(SockatableConverter))]
-        public IEnumerable<SocketableItem> socketedItems { get; set; }
     }
 }

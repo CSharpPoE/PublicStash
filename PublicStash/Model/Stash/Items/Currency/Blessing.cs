@@ -3,27 +3,15 @@ using System.Collections.Generic;
 
 namespace PathOfExile.Model
 {
-    public class Leaguestone : Item
+    public class Blessing : Item
     {
         public static readonly IEnumerable<String> BASES = new List<String>
         {
-            "Ambush Leaguestone",
-            "Anarchy Leaguestone",
-            "Beyond Leaguestone",
-            "Bloodlines Leaguestone",
-            "Breach Leaguestone",
-            "Domination Leaguestone",
-            "Essence Leaguestone",
-            "Invasion Leaguestone",
-            "Nemesis Leaguestone",
-            "Onslaught Leaguestone",
-            "Perandus Leaguestone",
-            "Prophecy Leaguestone",
-            "Rampage Leaguestone",
-            "Talisman Leaguestone",
-            "Tempest Leaguestone",
-            "Torment Leaguestone",
-            "Warbands Leaguestone",
+            "Blessing of Chayula",
+            "Blessing of Esh",
+            "Blessing of Tul",
+            "Blessing of Uul-Netol",
+            "Blessing of Xoph",
         };
 
         public bool verified { get; set; }
@@ -34,12 +22,12 @@ namespace PathOfExile.Model
         public string league { get; set; }
         public string id { get; set; }
         public bool identified { get; set; }
-        public bool corrupted { get; set; }
         public IEnumerable<Property> properties { get; set; }
-        public IEnumerable<string> implicitMods { get; set; }
         public IEnumerable<string> explicitMods { get; set; }
         public string descrText { get; set; }
         public int frameType { get; set; }
+        public int stackSize { get; set; }
+        public int maxStackSize { get; set; }
         public int x { get; set; }
         public int y { get; set; }
         public string inventoryId { get; set; }

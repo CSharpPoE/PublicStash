@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using PoEPublicStash.Model;
+using PathOfExile.Model;
 
-namespace PoEPublicStash
+namespace PathOfExile
 {
     internal class Handler
     {
@@ -15,7 +15,10 @@ namespace PoEPublicStash
             _client ?? (_client = new HttpClient());
     }
 
-    public static class API
+    /// <summary>
+    /// A static class containing methods to get public stash tabs from path of exile's public api
+    /// </summary>
+    public static class PublicStashAPI
     {
         /// <summary>
         /// The path of exile public stash url.
@@ -44,20 +47,18 @@ namespace PoEPublicStash
         /// <summary>
         /// Does a GET to the path of exile public stash api with id as the query
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">unique id for the public stash data set to be fetched</param>
         /// <returns></returns>
-        public static async Task<PublicStash> GetPublicStashAsync(String id) =>
+        public static async Task<PublicStash> GetAsync(String id) =>
             GetAsync<PublicStash>(await Handler.INSTANCE.GetAsync($"{POE_API_PUBLIC_STASH_URL}?id={id}"))
                 .Result;
-
 
         /// <summary>
         /// Does a GET to the path of exile public stash api with the latest change id as the query
         /// </summary>
         /// <returns></returns>
-        public static async Task<PublicStash> GetLatestPublicStashAsync() =>
-            await GetPublicStashAsync(await GetLatestStashIdAsync());
-
+        public static async Task<PublicStash> GetAsync() =>
+            await GetAsync(await GetLatestStashIdAsync());
 
         /// <summary>
         /// Query up to three popular community provided poe sites for the latest available change id. 
@@ -76,9 +77,8 @@ namespace PoEPublicStash
             return default;
         }
 
-
         /// <summary>
-        /// Takes a HttpResponseMessage as a parameter and returns the deserialized content.
+        /// Takes a HttpResponseMessage as a parameter and returns the deserialized content from the request.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="response"></param>

@@ -1,17 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
-    public class Blessing : Item
+    public class Essence : Item
     {
         public static readonly IEnumerable<String> BASES = new List<String>
         {
-            "Blessing of Chayula",
-            "Blessing of Esh",
-            "Blessing of Tul",
-            "Blessing of Uul-Netol",
-            "Blessing of Xoph",
+            "Essence of Anger",
+            "Essence of Anguish",
+            "Essence of Contempt",
+            "Essence of Delirium",
+            "Essence of Doubt",
+            "Essence of Dread",
+            "Essence of Envy",
+            "Essence of Fear",
+            "Essence of Greed",
+            "Essence of Hatred",
+            "Essence of Horror",
+            "Essence of Hysteria",
+            "Essence of Insanity",
+            "Essence of Loathing",
+            "Essence of Misery",
+            "Essence of Rage",
+            "Essence of Scorn",
+            "Essence of Sorrow",
+            "Essence of Spite",
+            "Essence of Suffering",
+            "Essence of Torment",
+            "Essence of Woe",
+            "Essence of Wrath",
+            "Essence of Zeal",
+            "Remnant of Corruption",
         };
 
         public bool verified { get; set; }
@@ -21,7 +41,6 @@ namespace PoEPublicStash.Model
         public string icon { get; set; }
         public string league { get; set; }
         public string id { get; set; }
-        public string name { get; set; }
         public bool identified { get; set; }
         public IEnumerable<Property> properties { get; set; }
         public IEnumerable<string> explicitMods { get; set; }
@@ -33,6 +52,5 @@ namespace PoEPublicStash.Model
         public int x { get; set; }
         public int y { get; set; }
         public string inventoryId { get; set; }
-
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
     public abstract class Item
     {
         public string note { get; set; }
         public string typeLine { get; set; }
+        public string name { get; set; }
 
         public class Socket
         {

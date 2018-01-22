@@ -4,10 +4,12 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace PoEPublicStash.Model
+namespace PathOfExile.Model
 {
     internal class ItemConverter : JsonConverter
     {
+        public override bool CanWrite => false;
+
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
@@ -18,190 +20,207 @@ namespace PoEPublicStash.Model
         {
             dynamic obj = JObject.Load(reader);
 
-            switch (obj)
+            switch (obj.category)
             {
-                #region Gem
+                case JValue value:
+                    switch ((String) value)
+                    {
+                        #region Currency
 
-                case var gem when IsExactlyType(Gem.BASES, (String) obj.typeLine):
-                    return gem.ToObject<Gem>();
+                        case "currency":
+                            return obj.ToObject<Currency>();
 
-                #endregion
+                        #endregion
 
-                #region Divination
+                        #region Flask
 
-                case var divination when IsExactlyType(Divination.BASES, (String) obj.typeLine):
-                    return divination.ToObject<Divination>();
+                        case "flasks":
+                            return obj.ToObject<Flask>();
 
-                #endregion
+                        #endregion
 
-                #region League
+                        #region Gem
 
-                #region Abyss
+                        case "gems":
+                            return obj.ToObject<Gem>();
 
-                case var abyssjewel when IsPartOfType(AbyssJewel.BASES, (String) obj.typeLine):
-                    return abyssjewel.ToObject<AbyssJewel>();
+                        #endregion
 
-                #endregion
+                        #region Jewel
 
-                #region Legacy
+                        case "jewels":
+                            return obj.ToObject<Jewel>();
 
-                case var leaguestone when IsPartOfType(Leaguestone.BASES, (String) obj.typeLine):
-                    return leaguestone.ToObject<Leaguestone>();
+                        #endregion
 
-                #endregion
+                        #region Divination
 
-                #region Breach
+                        case "cards":
+                            return obj.ToObject<Divination>();
 
-                case var blessing when IsExactlyType(Blessing.BASES, (String) obj.typeLine):
-                    return blessing.ToObject<Blessing>();
+                        #endregion
 
-                case var breachstone when IsExactlyType(Breachstone.BASES, (String) obj.typeLine):
-                    return breachstone.ToObject<Breachstone>();
+                        #region Map
 
-                #endregion
+                        case "maps":
+                            return obj.ToObject<Map>();
 
-                #region Essence
+                        //case var fragment when IsExactlyType(Fragment.BASES, (String) obj.typeLine):
+                        //    return fragment.ToObject<Fragment>();
 
-                case var essence when IsPartOfType(Essence.BASES, (String) obj.typeLine):
-                    return essence.ToObject<Essence>();
+                        #endregion
 
-                #endregion
 
-                #region Prophecy
+                        #region Legacy
 
-                case var prophecy when IsExactlyType(Prophecy.BASES, (String) obj.typeLine):
-                    return prophecy.ToObject<Prophecy>();
+                        case "leaguestones":
+                            return obj.ToObject<Leaguestone>();
 
-                #endregion
+                        #endregion
+                    }
+                    break;
 
-                #region Talisman
+                case JObject o:
+                    switch ((String) o.First.First[0])
+                    {
+                        #region League
 
-                case var talisman when IsPartOfType(Talisman.BASES, (String) obj.typeLine):
-                    return talisman.ToObject<Talisman>();
+                        #region Abyss
 
-                #endregion
+                        case "abyss":
+                            return obj.ToObject<AbyssJewel>();
 
-                #endregion
+                        #endregion
 
-                #region Jewel
+                        #region Harbinger
 
-                case var jewel when IsPartOfType(Jewel.BASES, (String) obj.typeLine):
-                    return jewel.ToObject<Jewel>();
+                        case "piece":
+                            return obj.ToObject<Piece>();
 
-                #endregion
+                        #endregion
 
-                #region Jewellery
+                        #region Breach
 
-                case var amulet when IsPartOfType(Amulet.BASES, (String) obj.typeLine):
-                    return amulet.ToObject<Amulet>();
+                        //case var blessing when IsExactlyType(Blessing.BASES, (String) obj.typeLine):
+                        //    return blessing.ToObject<Blessing>();
 
-                case var ring when IsPartOfType(Ring.BASES, (String) obj.typeLine):
-                    return ring.ToObject<Ring>();
+                        //case var breachstone when IsExactlyType(Breachstone.BASES, (String) obj.typeLine):
+                        //    return breachstone.ToObject<Breachstone>();
 
-                case var belt when IsPartOfType(Belt.BASES, (String) obj.typeLine):
-                    return belt.ToObject<Belt>();
+                        #endregion
 
-                #endregion
+                        #region Essence
 
-                #region Flask
+                        //case var essence when IsPartOfType(Essence.BASES, (String) obj.typeLine):
+                        //    return essence.ToObject<Essence>();
 
-                case var flask when IsPartOfType(Flask.BASES, (String) obj.typeLine):
-                    return flask.ToObject<Flask>();
+                        #endregion
 
-                #endregion
+                        #region Prophecy
 
-                #region Armour
+                        //case var prophecy when IsExactlyType(Prophecy.BASES, (String) obj.typeLine):
+                        //    return prophecy.ToObject<Prophecy>();
 
-                case var bodyarmour when IsPartOfType(Body.BASES, (String) obj.typeLine):
-                    return bodyarmour.ToObject<Body>();
+                        #endregion
 
-                case var helmet when IsPartOfType(Helmet.BASES, (String) obj.typeLine):
-                    return helmet.ToObject<Helmet>();
+                        #region Talisman
 
-                case var gloves when IsPartOfType(Gloves.BASES, (String) obj.typeLine):
-                    return gloves.ToObject<Gloves>();
+                        //case var talisman when IsPartOfType(Talisman.BASES, (String) obj.typeLine):
+                        //    return talisman.ToObject<Talisman>();
 
-                case var boots when IsPartOfType(Boots.BASES, (String) obj.typeLine):
-                    return boots.ToObject<Boots>();
+                        #endregion
 
-                case var shield when IsPartOfType(Shield.BASES, (String) obj.typeLine):
-                    return shield.ToObject<Shield>();
+                        #endregion
 
-                #endregion
+                        #region Jewellery
 
-                #region Weapon
+                        case "amulet":
+                            return obj.ToObject<Amulet>();
 
-                case var bow when IsPartOfType(Bow.BASES, (String) obj.typeLine):
-                    return bow.ToObject<Bow>();
+                        case "ring":
+                            return obj.ToObject<Ring>();
 
-                case var claw when IsPartOfType(Claw.BASES, (String) obj.typeLine):
-                    return claw.ToObject<Claw>();
+                        case "belt":
+                            return obj.ToObject<Belt>();
 
-                case var dagger when IsPartOfType(Dagger.BASES, (String) obj.typeLine):
-                    return dagger.ToObject<Dagger>();
+                        #endregion
 
-                case var onehandedaxe when IsPartOfType(OneHandedAxe.BASES, (String) obj.typeLine):
-                    return onehandedaxe.ToObject<OneHandedAxe>();
+                        #region Armour
 
-                case var onehandedmace when IsPartOfType(OneHandedMace.BASES, (String) obj.typeLine):
-                    return onehandedmace.ToObject<OneHandedMace>();
+                        case "chest":
+                            return obj.ToObject<Chest>();
 
-                case var onehandedsword when IsPartOfType(OneHandedSword.BASES, (String) obj.typeLine):
-                    return onehandedsword.ToObject<OneHandedSword>();
+                        case "helmet":
+                            return obj.ToObject<Helmet>();
 
-                case var sceptre when IsPartOfType(Sceptre.BASES, (String) obj.typeLine):
-                    return sceptre.ToObject<Sceptre>();
+                        case "gloves":
+                            return obj.ToObject<Gloves>();
 
-                case var staff when IsPartOfType(Staff.BASES, (String) obj.typeLine):
-                    return staff.ToObject<Staff>();
+                        case "boots":
+                            return obj.ToObject<Boots>();
 
-                case var twohandedaxe when IsPartOfType(TwoHandedAxe.BASES, (String) obj.typeLine):
-                    return twohandedaxe.ToObject<TwoHandedAxe>();
+                        case "shield":
+                            return obj.ToObject<Shield>();
 
-                case var twohandedmace when IsPartOfType(TwoHandedMace.BASES, (String) obj.typeLine):
-                    return twohandedmace.ToObject<TwoHandedMace>();
+                        case "quiver":
+                            return obj.ToObject<Quiver>();
 
-                case var twohandedsword when IsPartOfType(TwoHandedSword.BASES, (String) obj.typeLine):
-                    return twohandedsword.ToObject<TwoHandedSword>();
+                        #endregion
 
-                case var wand when IsPartOfType(Wand.BASES, (String) obj.typeLine):
-                    return wand.ToObject<Wand>();
+                        #region Weapon
 
-                case var quiver when IsPartOfType(Quiver.BASES, (String) obj.typeLine):
-                    return quiver.ToObject<Quiver>();
+                        case "bow":
+                            return obj.ToObject<Bow>();
 
-                case var fishingrod when IsPartOfType(FishingRod.BASES, (String) obj.typeLine):
-                    return fishingrod.ToObject<FishingRod>();
+                        case "claw":
+                            return obj.ToObject<Claw>();
 
-                #endregion
+                        case "dagger":
+                            return obj.ToObject<Dagger>();
 
-                #region Currency
+                        case "oneaxe":
+                            return obj.ToObject<OneHandedAxe>();
 
-                case var currency when IsExactlyType(Currency.BASES, (String) obj.typeLine):
-                    return currency.ToObject<Currency>();
+                        case "onemace":
+                            return obj.ToObject<OneHandedMace>();
 
-                #endregion
+                        case "onesword":
+                            return obj.ToObject<OneHandedSword>();
 
-                #region Map
+                        case "sceptre":
+                            return obj.ToObject<Sceptre>();
 
-                case var map when IsPartOfType(Map.BASES, (String) obj.typeLine):
-                    return map.ToObject<Map>();
+                        case "staff":
+                            return obj.ToObject<Staff>();
 
-                case var fragment when IsExactlyType(Fragment.BASES, (String) obj.typeLine):
-                    return fragment.ToObject<Fragment>();
+                        case "twoaxe":
+                            return obj.ToObject<TwoHandedAxe>();
 
-                #endregion
+                        case "twomace":
+                            return obj.ToObject<TwoHandedMace>();
 
-                default:
-                    return obj.ToObject<UnspecifiedItem>();
+                        case "twosword":
+                            return obj.ToObject<TwoHandedSword>();
+
+                        case "wand":
+                            return obj.ToObject<Wand>();
+
+                        case "rod":
+                            return obj.ToObject<FishingRod>();
+
+                        #endregion
+                    }
+                    break;
             }
+
+            return obj.ToObject<UnspecifiedItem>();
         }
 
-        private static bool IsPartOfType(IEnumerable<String> list, String obj) =>
-            list.Any(e => obj.IndexOf(e, StringComparison.Ordinal) != -1);
+        //private static bool IsPartOfType(IEnumerable<String> list, String obj) =>
+        //    list.Any(e => obj.IndexOf(e, StringComparison.Ordinal) != -1);
 
-        private static bool IsExactlyType(IEnumerable<String> list, String obj) =>
-            list.Contains(obj);
+        //private static bool IsExactlyType(IEnumerable<String> list, String obj) =>
+        //    list.Contains(obj);
 
         public override bool CanConvert(Type objectType) => objectType == typeof(Item);
     }
