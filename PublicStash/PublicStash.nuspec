@@ -7,7 +7,7 @@
     <authors>Sebastian de Rzewuski</authors>
     <owners>Sebastian de Rzewuski</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>C# Framework to work with Path of Exile's public API</description>
+    <description>C# Framework to work with Path of Exile's public stash API</description>
     <releaseNotes>Updated the data model to use path of exiles own categorization</releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>PathOfExile Api PublicStash</tags>
