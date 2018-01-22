@@ -1,7 +1,6 @@
-# CSharpPoE
+# PublicStashParser
 
-Contains C# tools to work with Grinding Gear Games public API.
-* PublicStash - C# Json-Object mapping for Path of Exile's Public Stash API.
+Json to Object mapping for Path of Exile's Public Stash API.
 
 ## Getting Started
 
