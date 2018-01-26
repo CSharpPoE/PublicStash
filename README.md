@@ -1,4 +1,4 @@
-# PublicStashParser
+# PublicStash
 
 Json to Object mapping for Path of Exile's Public Stash API.
 
