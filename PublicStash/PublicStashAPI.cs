@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using PathOfExile.Model;
 
 namespace PathOfExile
@@ -25,7 +27,6 @@ namespace PathOfExile
         /// </summary>
         private const String POE_API_PUBLIC_STASH_URL = "http://api.pathofexile.com/public-stash-tabs/";
 
-
         /// <summary>
         /// URLs to a few sites containing the latest change id
         /// </summary>
@@ -36,13 +37,50 @@ namespace PathOfExile
             "http://poe-rates.com/actions/getLastChangeId.php"
         };
 
-        private static readonly JsonSerializerSettings Converters = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings DefaultResolver = new JsonSerializerSettings
         {
-            Converters = new JsonConverter[]
-            {
-                new ItemConverter()
-            }
+            ContractResolver = new DefaultResolver()
         };
+
+        public static void Run(List<Action<PublicStash>> actions, int delay = 10000)
+        {
+            var init = true;
+            PublicStash publicStash = null;
+            var nextChangeId = "";
+            var cachedChangeId = "";
+            for (;;)
+            {
+                try
+                {
+                    if (init)
+                    {
+                        publicStash = GetAsync().Result;
+                        nextChangeId = publicStash.next_change_id;
+                        cachedChangeId = "";
+                        init = false;
+                    }
+                    var Start = DateTime.UtcNow;
+                    if (cachedChangeId != nextChangeId)
+                    {
+                        cachedChangeId = nextChangeId;
+                        foreach (var action in actions) action(publicStash);
+                    }
+                    else
+                    {
+                        publicStash = GetAsync(nextChangeId).Result;
+                        nextChangeId = publicStash.next_change_id;
+                        new ManualResetEvent(false).WaitOne(Math.Max(0,
+                            delay - (int) (DateTime.UtcNow - Start).TotalMilliseconds));
+                    }
+                }
+                catch
+                {
+                    if (String.IsNullOrEmpty(nextChangeId))
+                        nextChangeId = GetLatestStashIdAsync().Result;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Does a GET to the path of exile public stash api with id as the query
@@ -84,6 +122,16 @@ namespace PathOfExile
         /// <param name="response"></param>
         /// <returns></returns>
         private static async Task<T> GetAsync<T>(HttpResponseMessage response) =>
-            JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync(), Converters);
+            JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync(), DefaultResolver);
+    }
+
+    internal class DefaultResolver : DefaultContractResolver
+    {
+        protected override JsonContract CreateContract(Type objectType)
+        {
+            var contract = base.CreateContract(objectType);
+            if (objectType == typeof(Item)) contract.Converter = new ItemConverter();
+            return contract;
+        }
     }
 }

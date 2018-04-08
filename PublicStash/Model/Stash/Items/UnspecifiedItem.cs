@@ -7,19 +7,9 @@ namespace PathOfExile.Model
 {
     public class UnspecifiedItem : Item
     {
-        public bool verified { get; set; }
-        public int w { get; set; }
-        public int h { get; set; }
-        public int ilvl { get; set; }
-        public string icon { get; set; }
-        public string league { get; set; }
-        public string id { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
         public string inventoryId { get; set; }
 
         public IEnumerable<Socket> sockets { get; set; }
-        public bool identified { get; set; }
         public bool corrupted { get; set; }
         public bool lockedToCharacter { get; set; }
 
@@ -30,15 +20,14 @@ namespace PathOfExile.Model
         public IEnumerable<String> enchantMods { get; set; }
         public IEnumerable<String> craftedMods { get; set; }
         public IEnumerable<String> flavourText { get; set; }
-        public int frameType { get; set; }
-
+        
         [JsonProperty(NullValueHandling = Ignore), JsonConverter(typeof(SockatableConverter))]
         public IEnumerable<SocketableItem> socketedItems { get; set; }
 
         public IEnumerable<Property> additionalProperties { get; set; }
 
         public bool duplicated { get; set; }
-        public int maxStackSize { get; set; }
+        public bool maxStackSize { get; set; }
         public IEnumerable<Requirement> nextLevelRequirements { get; set; }
         public int stackSize { get; set; }
         public int talismanTier { get; set; }

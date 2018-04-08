@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{60E6F929-F4C6-48BB-8979-9A7E1B1F3A22}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>PathOfExile</RootNamespace>
     <AssemblyName>PathOfExile</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Stash\Items\Accessories\Accessory.cs" />
+    <Compile Include="Model\Stash\Items\Accessories\SocketableAccessory.cs" />
+    <Compile Include="Model\Stash\Items\Beast\Beast.cs" />
     <Compile Include="PublicStashAPI.cs" />
     <Compile Include="Model\Stash\Items\Currency\Piece.cs" />
     <Compile Include="Model\Stash\Items\SockatableConverter.cs" />
@@ -82,7 +85,7 @@
     <Compile Include="Model\Stash\Items\Map\Map.cs" />
     <Compile Include="Model\Stash\Items\SocketableItem.cs" />
     <Compile Include="Model\Stash\Items\Currency\Currency.cs" />
-    <Compile Include="Model\Stash\Items\Currency\Divination.cs" />
+    <Compile Include="Model\Stash\Items\Currency\Card.cs" />
     <Compile Include="Model\Stash\Items\Weapon\Bow.cs" />
     <Compile Include="Model\Stash\Items\Weapon\Claw.cs" />
     <Compile Include="Model\Stash\Items\Weapon\Dagger.cs" />

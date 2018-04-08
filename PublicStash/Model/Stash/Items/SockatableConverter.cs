@@ -25,9 +25,11 @@ namespace PathOfExile.Model
             {
                 switch (obj.category)
                 {
+                    // ReSharper disable once UnusedVariable
                     case JValue value:
                         list.Add(obj.ToObject<Gem>());
                         break;
+                    // ReSharper disable once UnusedVariable
                     case JObject value:
                         list.Add(obj.ToObject<AbyssJewel>());
                         break;

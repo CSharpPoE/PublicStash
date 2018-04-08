@@ -23,6 +23,7 @@ namespace PublicStashTester
 
         public static void Run(List<Action> actions, int delay = 10000)
         {
+            // ReSharper disable once NotAccessedVariable
             var iteration = 0;
             var publicStash = PublicStashAPI.GetAsync().Result;
             var nextChangeId = publicStash.next_change_id;
@@ -48,6 +49,7 @@ namespace PublicStashTester
 
         private static void GatherSocketableItems()
         {
+            // ReSharper disable once NotAccessedVariable
             var iteration = 0;
 
             var publicStash = PublicStashAPI.GetAsync().Result;
@@ -92,6 +94,7 @@ namespace PublicStashTester
                             }
                             else if (type == typeof(UnspecifiedItem))
                             {
+                                // ReSharper disable once UnusedVariable
                                 var lines = File.ReadAllLines("C:/tmp/poe/missItem.txt");
                                 unspecified.Add(((UnspecifiedItem) item, cachedChangeId));
                                 File.AppendAllLines("C:/tmp/poe/missItem.txt",
@@ -114,6 +117,7 @@ namespace PublicStashTester
 
         private static void RunTrader()
         {
+            // ReSharper disable once NotAccessedVariable
             var iteration = 0;
 
             var publicStash = PublicStashAPI.GetAsync().Result;
@@ -158,10 +162,10 @@ namespace PublicStashTester
 
         private static void FunSmallExamples(PublicStash publicStash)
         {
-            var KnifeList = GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(publicStash);
-            var BeltList = GetAllWhoHasPricedTheirStygianVise(publicStash);
-            var CurrencyDict = GetAllCurrencyAndAddThemUp(publicStash);
-            var MapList = GetInterestingMapsListedForLessOrEqualToFifteenChaos(publicStash);
+            //var KnifeList = GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(publicStash);
+            //var BeltList = GetAllWhoHasPricedTheirStygianVise(publicStash);
+            //var CurrencyDict = GetAllCurrencyAndAddThemUp(publicStash);
+            //var MapList = GetInterestingMapsListedForLessOrEqualToFifteenChaos(publicStash);
         }
 
         private static List<(String, Gem)> GetAllUsersWithEtherealKnivesGemsIntheirStashIfAny(PublicStash ps)
