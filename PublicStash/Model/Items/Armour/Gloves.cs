@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace PathOfExile.Model.Items.Armour
+{
+    public class Gloves : Armour
+    {
+        public static readonly IEnumerable<String> BASES = new List<String>
+        {
+            "Ambush Mitts",
+            "Ancient Gauntlets",
+            "Antique Gauntlets",
+            "Arcanist Gloves",
+            "Assassin's Mitts",
+            "Bronze Gauntlets",
+            "Bronzescale Gauntlets",
+            "Carnal Mitts",
+            "Chain Gloves",
+            "Clasped Mitts",
+            "Conjurer Gloves",
+            "Crusader Gloves",
+            "Deerskin Gloves",
+            "Dragonscale Gauntlets",
+            "Eelskin Gloves",
+            "Embroidered Gloves",
+            "Fingerless Silk Gloves",
+            "Fishscale Gauntlets",
+            "Goathide Gloves",
+            "Golden Bracers",
+            "Goliath Gauntlets",
+            "Gripped Gloves",
+            "Hydrascale Gauntlets",
+            "Iron Gauntlets",
+            "Ironscale Gauntlets",
+            "Legion Gloves",
+            "Mesh Gloves",
+            "Murder Mitts",
+            "Nubuck Gloves",
+            "Plated Gauntlets",
+            "Rawhide Gloves",
+            "Ringmail Gloves",
+            "Riveted Gloves",
+            "Samite Gloves",
+            "Satin Gloves",
+            "Serpentscale Gauntlets",
+            "Shagreen Gloves",
+            "Sharkskin Gloves",
+            "Silk Gloves",
+            "Slink Gloves",
+            "Soldier Gloves",
+            "Sorcerer Gloves",
+            "Spiked Gloves",
+            "Stealth Gloves",
+            "Steel Gauntlets",
+            "Steelscale Gauntlets",
+            "Strapped Mitts",
+            "Titan Gauntlets",
+            "Trapper Mitts",
+            "Vaal Gauntlets",
+            "Velvet Gloves",
+            "Wool Gloves",
+            "Wrapped Mitts",
+            "Wyrmscale Gauntlets",
+            "Zealot Gloves",
+        };
+    }
+}

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PathOfExile.Model;
+using PathOfExile.Model.Items;
 
 namespace PathOfExile
 {
@@ -30,8 +31,7 @@ namespace PathOfExile
         /// <summary>
         /// URLs to a few sites containing the latest change id
         /// </summary>
-        private static readonly IEnumerable<String> POE_API_LATEST_CHANGE_ID_URL = new List<String>
-        {
+        private static readonly IEnumerable<String> POE_API_LATEST_CHANGE_ID_URL = new [] {
             "https://poe.ninja/api/Data/GetStats",
             "http://api.poe.ovh/ChangeID",
             "http://poe-rates.com/actions/getLastChangeId.php"

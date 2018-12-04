@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Threading;
 using PathOfExile;
-using PathOfExile.Model;
+using PathOfExile.Model.Items.Beast;
+using PathOfExile.Model.Items.Currency;
 
 namespace PoEPublicStash
 {
@@ -10,6 +11,7 @@ namespace PoEPublicStash
     {
         public static void Main(String[] args)
         {
+            //var t = PublicStashAPI.GetLatestStashIdAsync().Result;
             Run();
             //CheckForBugs();
             //CheckForBugs2();
@@ -25,18 +27,24 @@ namespace PoEPublicStash
                 //var g = PublicStashAPI.GetAsync("137293499-143655459-134858781-155093696-145277041").Result;
                 var g = PublicStashAPI.GetAsync(id).Result;
 
+                var currency = g.stashes.SelectMany(e => e.items.Select(item =>
+                {
+                    if ( item is Currency c ) return c;
+                    else return null;
+                })).Where(i => i != null).ToList();
+
                 var list2 = (from stash in g.stashes from item in stash.items where item != null select item).ToList();
 
-                var list = (from stash in g.stashes
-                    from item in stash.items
-                    where item.GetType() == typeof(UnspecifiedItem)
-                    select item).ToList();
+                //var list = (from stash in g.stashes
+                //    from item in stash.items
+                //    where item.GetType() == typeof(PathOfExile.Model.Items.UnspecifiedItem)
+                //    select item).ToList();
 
-                if (list.Any())
-                {
-                }
+                //if (list.Any())
+                //{
+                //}
 
-                var beasts = g.stashes.Select(stash => stash.items.Where(item => item.GetType() == typeof(Beast)).Select(e => e).ToList()).ToList();
+                //var beasts = g.stashes.Select(stash => stash.items.Where(item => item.GetType() == typeof(Beast)).Select(e => e).ToList()).ToList();
 
                 Thread.Sleep(10000);
                 iterations++;
