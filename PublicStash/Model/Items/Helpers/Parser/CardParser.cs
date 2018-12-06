@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace PathOfExile.Model.Internal
 {
-    class CurrencyParser : IJsonParser
+    class CardParser : IJsonParser
     {
         public string Parse(JObject obj)
         {

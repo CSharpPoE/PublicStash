@@ -37,6 +37,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.8.11.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.11\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -56,17 +59,23 @@
     <Compile Include="Model\Items\Accessories\Accessory.cs" />
     <Compile Include="Model\Items\Accessories\SocketableAccessory.cs" />
     <Compile Include="Model\Items\Beast\Beast.cs" />
+    <Compile Include="Model\Items\Card\Cards.cs" />
     <Compile Include="Model\Items\Currency\Orbs.cs" />
+    <Compile Include="Model\Items\Currency\Blessings.cs" />
+    <Compile Include="Model\Items\Currency\Prophecies.cs" />
+    <Compile Include="Model\Items\Helpers\Builder\CardBuilder.cs" />
     <Compile Include="Model\Items\Helpers\Builder\CurrencyBuilder.cs" />
+    <Compile Include="Model\Items\Helpers\Builder\UnspecifiedItemBuilder.cs" />
     <Compile Include="Model\Items\Helpers\interface\IBuilder.cs" />
     <Compile Include="Model\Items\Helpers\interface\IConstructor.cs" />
     <Compile Include="Model\Items\Helpers\interface\IParser.cs" />
     <Compile Include="Model\Items\Helpers\ItemConstructor.cs" />
-    <Compile Include="Model\Items\Helpers\MyAttributescs.cs" />
+    <Compile Include="Model\Items\Helpers\MyAttributes.cs" />
+    <Compile Include="Model\Items\Helpers\Parser\CardParser.cs" />
     <Compile Include="Model\Items\Helpers\Parser\CurrencyParser.cs" />
     <Compile Include="Model\Items\Helpers\Parser\JsonParser.cs" />
     <Compile Include="PublicStashAPI.cs" />
-    <Compile Include="Model\Items\Currency\Piece.cs" />
+    <Compile Include="Model\Items\Currency\old\Piece.cs" />
     <Compile Include="Model\Items\SockatableConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,18 +95,17 @@
     <Compile Include="Model\Items\Accessories\Ring.cs" />
     <Compile Include="Model\Items\Jewel\Jewel.cs" />
     <Compile Include="Model\Items\Jewel\AbyssJewel.cs" />
-    <Compile Include="Model\Items\Currency\Blessing.cs" />
+    <Compile Include="Model\Items\Currency\old\Blessing.cs" />
     <Compile Include="Model\Items\Map\Breachstone.cs" />
-    <Compile Include="Model\Items\Currency\Essence.cs" />
-    <Compile Include="Model\Items\Currency\AncientReliquaryKey.cs" />
+    <Compile Include="Model\Items\Currency\old\Essence.cs" />
+    <Compile Include="Model\Items\Currency\old\AncientReliquaryKey.cs" />
     <Compile Include="Model\Items\Map\Leaguestone.cs" />
-    <Compile Include="Model\Items\Currency\Prophecy.cs" />
+    <Compile Include="Model\Items\Currency\old\Prophecy.cs" />
     <Compile Include="Model\Items\Accessories\Talisman.cs" />
     <Compile Include="Model\Items\Map\Fragment.cs" />
     <Compile Include="Model\Items\Map\Map.cs" />
     <Compile Include="Model\Items\SocketableItem.cs" />
     <Compile Include="Model\Items\Currency\Currency.cs" />
-    <Compile Include="Model\Items\Currency\Card.cs" />
     <Compile Include="Model\Items\Weapon\Bow.cs" />
     <Compile Include="Model\Items\Weapon\Claw.cs" />
     <Compile Include="Model\Items\Weapon\Dagger.cs" />
@@ -120,6 +128,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\Items\Armour\old\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

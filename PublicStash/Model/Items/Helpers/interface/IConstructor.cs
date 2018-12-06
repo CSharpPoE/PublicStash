@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json.Linq;
+using PathOfExile.Model.Items;
 
-namespace PathOfExile.Model.Items
+namespace PathOfExile.Model.Internal
 {
     internal interface IConstructor<in In, out Out>
     {
-        IConstructor<In, Out> For(In obj);
-        Out Construct();
+        Out Construct(In obj);
     }
 
     internal interface IJsonConstructor : IConstructor<JObject, Item>

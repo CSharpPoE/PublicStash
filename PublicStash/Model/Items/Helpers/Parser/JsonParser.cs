@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 
-namespace PathOfExile.Model.Items.Helpers.Parser
+namespace PathOfExile.Model.Internal
 {
     internal class JsonParser : IJsonParser
     {

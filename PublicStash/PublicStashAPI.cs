@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PathOfExile.Model;
+using PathOfExile.Model.Internal;
 using PathOfExile.Model.Items;
 
 namespace PathOfExile

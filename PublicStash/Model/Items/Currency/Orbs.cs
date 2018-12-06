@@ -1,199 +1,203 @@
-﻿using PathOfExile.Model.Items.Helpers;
+﻿using PathOfExile.Model.Internal;
 
-namespace PathOfExile.Model.Items.Currency
+namespace PathOfExile.Model.Items.Currencies.Orbs
 {
-    [Currency("Albino Rhoa Feather")]
-    public class AlbinoRhoaFeather : Currency
+    public class Orb : Currency
     {
     }
 
-    [Currency("Apprentice Cartographer's Seal")]
-    public class ApprenticeCartographersSeal : Currency
+    [Orb("Albino Rhoa Feather")]
+    public class AlbinoRhoaFeather : Orb
     {
     }
 
-    [Currency("Apprentice Cartographer's Sextant")]
-    public class ApprenticeCartographersSextant : Currency
+    [Orb("Apprentice Cartographer's Seal")]
+    public class ApprenticeCartographersSeal : Orb
     {
     }
 
-    [Currency("Armourer's Scrap")]
-    public class ArmourersScrap : Currency
+    [Orb("Apprentice Cartographer's Sextant")]
+    public class ApprenticeCartographersSextant : Orb
     {
     }
 
-    [Currency("Blacksmith's Whetstone")]
-    public class BlacksmithsWhetstone : Currency
+    [Orb("Armourer's Scrap")]
+    public class ArmourersScrap : Orb
     {
     }
 
-    [Currency("Blessed Orb")]
-    public class BlessedOrb : Currency
+    [Orb("Blacksmith's Whetstone")]
+    public class BlacksmithsWhetstone : Orb
     {
     }
 
-    [Currency("Blessing of Chayula")]
-    public class BlessingofChayula : Currency
+    [Orb("Blessed Orb")]
+    public class BlessedOrb : Orb
     {
     }
 
-    [Currency("Blessing of Esh")]
-    public class BlessingofEsh : Currency
+    [Orb("Blessing of Chayula")]
+    public class BlessingofChayula : Orb
     {
     }
 
-    [Currency("Blessing of Tul")]
-    public class BlessingofTul : Currency
+    [Orb("Blessing of Esh")]
+    public class BlessingofEsh : Orb
     {
     }
 
-    [Currency("Blessing of Uul-Netol")]
-    public class BlessingofUulNetol : Currency
+    [Orb("Blessing of Tul")]
+    public class BlessingofTul : Orb
     {
     }
 
-    [Currency("Blessing of Xoph")]
-    public class BlessingofXoph : Currency
+    [Orb("Blessing of Uul-Netol")]
+    public class BlessingofUulNetol : Orb
     {
     }
 
-    [Currency("Cartographer's Chisel")]
-    public class CartographersChisel : Currency
+    [Orb("Blessing of Xoph")]
+    public class BlessingofXoph : Orb
     {
     }
 
-    [Currency("Chaos Orb")]
-    public class ChaosOrb : Currency
+    [Orb("Cartographer's Chisel")]
+    public class CartographersChisel : Orb
     {
     }
 
-    [Currency("Chromatic Orb")]
-    public class ChromaticOrb : Currency
+    [Orb("Chaos Orb")]
+    public class ChaosOrb : Orb
     {
     }
 
-    [Currency("Divine Orb")]
-    public class DivineOrb : Currency
+    [Orb("Chromatic Orb")]
+    public class ChromaticOrb : Orb
     {
     }
 
-    [Currency("Exalted Orb")]
-    public class ExaltedOrb : Currency
+    [Orb("Divine Orb")]
+    public class DivineOrb : Orb
     {
     }
 
-    [Currency("Gemcutter's Prism")]
-    public class GemcuttersPrism : Currency
+    [Orb("Exalted Orb")]
+    public class ExaltedOrb : Orb
     {
     }
 
-    [Currency("Glassblower's Bauble")]
-    public class GlassblowersBauble : Currency
+    [Orb("Gemcutter's Prism")]
+    public class GemcuttersPrism : Orb
     {
     }
 
-    [Currency("Jeweller's Orb")]
-    public class JewellersOrb : Currency
+    [Orb("Glassblower's Bauble")]
+    public class GlassblowersBauble : Orb
     {
     }
 
-    [Currency("Journeyman Cartographer's Seal")]
-    public class JourneymanCartographersSeal : Currency
+    [Orb("Jeweller's Orb")]
+    public class JewellersOrb : Orb
     {
     }
 
-    [Currency("Journeyman Cartographer's Sextant")]
-    public class JourneymanCartographersSextant : Currency
+    [Orb("Journeyman Cartographer's Seal")]
+    public class JourneymanCartographersSeal : Orb
     {
     }
 
-    [Currency("Master Cartographer's Seal")]
-    public class MasterCartographersSeal : Currency
+    [Orb("Journeyman Cartographer's Sextant")]
+    public class JourneymanCartographersSextant : Orb
     {
     }
 
-    [Currency("Master Cartographer's Sextant")]
-    public class MasterCartographersSextant : Currency
+    [Orb("Master Cartographer's Seal")]
+    public class MasterCartographersSeal : Orb
     {
     }
 
-    [Currency("Mirror of Kalandra")]
-    public class MirrorofKalandra : Currency
+    [Orb("Master Cartographer's Sextant")]
+    public class MasterCartographersSextant : Orb
     {
     }
 
-    [Currency("Orb of Alchemy")]
-    public class OrbofAlchemy : Currency
+    [Orb("Mirror of Kalandra")]
+    public class MirrorofKalandra : Orb
     {
     }
 
-    [Currency("Orb of Alteration")]
-    public class OrbofAlteration : Currency
+    [Orb("Orb of Alchemy")]
+    public class OrbofAlchemy : Orb
     {
     }
 
-    [Currency("Orb of Annulment")]
-    public class OrbofAnnulment : Currency
+    [Orb("Orb of Alteration")]
+    public class OrbofAlteration : Orb
     {
     }
 
-    [Currency("Orb of Augmentation")]
-    public class OrbofAugmentation : Currency
+    [Orb("Orb of Annulment")]
+    public class OrbofAnnulment : Orb
     {
     }
 
-    [Currency("Orb of Chance")]
-    public class OrbofChance : Currency
+    [Orb("Orb of Augmentation")]
+    public class OrbofAugmentation : Orb
     {
     }
 
-    [Currency("Orb of Fusing")]
-    public class OrbofFusing : Currency
+    [Orb("Orb of Chance")]
+    public class OrbofChance : Orb
     {
     }
 
-    [Currency("Orb of Regret")]
-    public class OrbofRegret : Currency
+    [Orb("Orb of Fusing")]
+    public class OrbofFusing : Orb
     {
     }
 
-    [Currency("Orb of Scouring")]
-    public class OrbofScouring : Currency
+    [Orb("Orb of Regret")]
+    public class OrbofRegret : Orb
     {
     }
 
-    [Currency("Orb of Transmutation")]
-    public class OrbofTransmutation : Currency
+    [Orb("Orb of Scouring")]
+    public class OrbofScouring : Orb
     {
     }
 
-    [Currency("Portal Scroll")]
-    public class PortalScroll : Currency
+    [Orb("Orb of Transmutation")]
+    public class OrbofTransmutation : Orb
     {
     }
 
-    [Currency("Regal Orb")]
-    public class RegalOrb : Currency
+    [Orb("Portal Scroll")]
+    public class PortalScroll : Orb
     {
     }
 
-    [Currency("Scroll of Wisdom")]
-    public class ScrollofWisdom : Currency
+    [Orb("Regal Orb")]
+    public class RegalOrb : Orb
     {
     }
 
-    [Currency("Silver Coin")]
-    public class SilverCoin : Currency
+    [Orb("Scroll of Wisdom")]
+    public class ScrollofWisdom : Orb
     {
     }
 
-    [Currency("Unshaping Orb")]
-    public class UnshapingOrb : Currency
+    [Orb("Silver Coin")]
+    public class SilverCoin : Orb
     {
     }
 
-    [Currency("Vaal Orb")]
-    public class VaalOrb : Currency
+    [Orb("Unshaping Orb")]
+    public class UnshapingOrb : Orb
+    {
+    }
+
+    [Orb("Vaal Orb")]
+    public class VaalOrb : Orb
     {
     }
 }

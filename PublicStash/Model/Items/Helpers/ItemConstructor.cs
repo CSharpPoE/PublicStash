@@ -1,37 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using PathOfExile.Model.Items.Currency;
-using PathOfExile.Model.Items.Helpers.Parser;
+using PathOfExile.Model.Items;
 
-namespace PathOfExile.Model.Items
+namespace PathOfExile.Model.Internal
 {
     class ItemConstructor : IJsonConstructor
     {
         private IParser<JObject> Parser { get; }
-        private IDictionary<String, IJsonBuilder<Item>> Builders { get; }
+        private IJsonBuilder<UnspecifiedItem> UnspecifiedItemBuilder{ get; }
 
-        private JObject JObject{ get; set; }
+        private IDictionary<String, IJsonBuilder<Item>> Builders { get; }
 
         public ItemConstructor()
         {
             Parser = new JsonParser();
 
+            UnspecifiedItemBuilder = new UnspecifiedItemBuilder();
             Builders = new Dictionary<String, IJsonBuilder<Item>>
             {
-                ["Currency"] = new CurrencyBuilder()
+                ["Currency"] = new CurrencyBuilder(),
+                ["Divination"] = new CardBuilder()
             };
         }
-
-        public IConstructor<JObject, Item> For(JObject obj)
-        {
-            JObject = obj;
-            return this;
-        }
         
-        public Item Construct()
+        public Item Construct(JObject obj)
         {
-            return Builders.TryGetValue(Parser.Parse(JObject), out var builder) ? builder.For(JObject).Build() : null;
+            return Builders.TryGetValue(Parser.Parse(obj), out var builder)
+                ? builder.For(obj).Build()
+                : UnspecifiedItemBuilder.For(obj).Build();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 
-namespace PathOfExile.Model.Items
+namespace PathOfExile.Model.Internal
 {
     internal interface IParser<in T>
     {

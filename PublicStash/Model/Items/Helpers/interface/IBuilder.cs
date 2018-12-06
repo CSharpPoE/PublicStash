@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using PathOfExile.Model.Items;
 
-namespace PathOfExile.Model
+namespace PathOfExile.Model.Internal
 {
     internal interface IBuilder<in In, out Out>
     {

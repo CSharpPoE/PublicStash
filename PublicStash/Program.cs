@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using PathOfExile;
-using PathOfExile.Model.Items.Beast;
-using PathOfExile.Model.Items.Currency;
+using PathOfExile.Model.Items;
+using PathOfExile.Model.Items.Cards;
+using PathOfExile.Model.Items.Currencies;
+using PathOfExile.Model.Items.Currencies.Prophecies;
 
-namespace PoEPublicStash
+namespace PathOfExile
 {
     class Program
     {
+        public static Stopwatch watch = new Stopwatch();
+
+
         public static void Main(String[] args)
         {
             //var t = PublicStashAPI.GetLatestStashIdAsync().Result;
@@ -21,30 +26,30 @@ namespace PoEPublicStash
         public static void Run()
         {
             var iterations = 0;
-            for (;;)
+            // Todo Add CancellationToken
+            while (true)
             {
+                watch.Restart();
                 var id = PublicStashAPI.GetLatestStashIdAsync().Result;
                 //var g = PublicStashAPI.GetAsync("137293499-143655459-134858781-155093696-145277041").Result;
                 var g = PublicStashAPI.GetAsync(id).Result;
 
-                var currency = g.stashes.SelectMany(e => e.items.Select(item =>
+                var unspecified = g.stashes.SelectMany(e => e.items.Select(item =>
                 {
-                    if ( item is Currency c ) return c;
-                    else return null;
+                    if ( item is UnspecifiedItem c && c.socketedItems != null && c.socketedItems.Any()) return c;
+                    return null;
                 })).Where(i => i != null).ToList();
 
-                var list2 = (from stash in g.stashes from item in stash.items where item != null select item).ToList();
-
-                //var list = (from stash in g.stashes
-                //    from item in stash.items
-                //    where item.GetType() == typeof(PathOfExile.Model.Items.UnspecifiedItem)
-                //    select item).ToList();
-
-                //if (list.Any())
+                //if (unspecified.Any())
                 //{
-                //}
 
-                //var beasts = g.stashes.Select(stash => stash.items.Where(item => item.GetType() == typeof(Beast)).Select(e => e).ToList()).ToList();
+                //}
+                
+                //var currency = g.stashes.SelectMany(e => e.items.Select(item =>
+                //{
+                //    if ( item is Prophecy c ) return c;
+                //    return null;
+                //})).Where(i => i != null).ToList();
 
                 Thread.Sleep(10000);
                 iterations++;

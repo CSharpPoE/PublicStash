@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using static Newtonsoft.Json.NullValueHandling;
 
 namespace PathOfExile.Model.Items
 {
@@ -20,7 +21,8 @@ namespace PathOfExile.Model.Items
         public IEnumerable<String> craftedMods { get; set; }
         public IEnumerable<String> flavourText { get; set; }
         
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore), JsonConverter(typeof(SockatableConverter))]
+        [JsonProperty(NullValueHandling = Ignore)]
+        [JsonConverter(typeof(SockatableConverter))]
         public IEnumerable<SocketableItem> socketedItems { get; set; }
 
         public IEnumerable<Property> additionalProperties { get; set; }
