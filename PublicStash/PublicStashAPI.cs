@@ -11,11 +11,11 @@ using PathOfExile.Model.Items;
 
 namespace PathOfExile
 {
-    internal class Handler
+    internal class Http
     {
         private static HttpClient _client;
 
-        internal static HttpClient INSTANCE { get; } =
+        internal static HttpClient Instance { get; } =
             _client ?? (_client = new HttpClient());
     }
 
@@ -32,7 +32,8 @@ namespace PathOfExile
         /// <summary>
         /// URLs to a few sites containing the latest change id
         /// </summary>
-        private static readonly IEnumerable<String> POE_API_LATEST_CHANGE_ID_URL = new [] {
+        private static readonly IEnumerable<String> POE_API_LATEST_CHANGE_ID_URL = new[]
+        {
             "https://poe.ninja/api/Data/GetStats",
             "http://api.poe.ovh/ChangeID",
             "http://poe-rates.com/actions/getLastChangeId.php"
@@ -49,7 +50,7 @@ namespace PathOfExile
             PublicStash publicStash = null;
             var nextChangeId = "";
             var cachedChangeId = "";
-            for (;;)
+            while (true)
             {
                 try
                 {
@@ -60,6 +61,7 @@ namespace PathOfExile
                         cachedChangeId = "";
                         init = false;
                     }
+
                     var Start = DateTime.UtcNow;
                     if (cachedChangeId != nextChangeId)
                     {
@@ -82,6 +84,12 @@ namespace PathOfExile
             }
         }
 
+        /// <summary>
+        /// Does a GET to the path of exile public stash api with the latest change id as the query
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<PublicStash> GetAsync() =>
+            await GetAsync(await GetLatestStashIdAsync());
 
         /// <summary>
         /// Does a GET to the path of exile public stash api with id as the query
@@ -89,15 +97,7 @@ namespace PathOfExile
         /// <param name="id">unique id for the public stash data set to be fetched</param>
         /// <returns></returns>
         public static async Task<PublicStash> GetAsync(String id) =>
-            GetAsync<PublicStash>(await Handler.INSTANCE.GetAsync($"{POE_API_PUBLIC_STASH_URL}?id={id}"))
-                .Result;
-
-        /// <summary>
-        /// Does a GET to the path of exile public stash api with the latest change id as the query
-        /// </summary>
-        /// <returns></returns>
-        public static async Task<PublicStash> GetAsync() =>
-            await GetAsync(await GetLatestStashIdAsync());
+            await GetAsync<PublicStash>(await Http.Instance.GetAsync($"{POE_API_PUBLIC_STASH_URL}?id={id}"));
 
         /// <summary>
         /// Query up to three popular community provided poe sites for the latest available change id. 
@@ -107,10 +107,8 @@ namespace PathOfExile
         {
             foreach (var url in POE_API_LATEST_CHANGE_ID_URL)
             {
-                String result = GetAsync<dynamic>(await Handler.INSTANCE.GetAsync(url)).Result?.next_change_id;
-
-                if (!String.IsNullOrEmpty(result))
-                    return result;
+                String result = GetAsync<dynamic>(await Http.Instance.GetAsync(url)).Result?.next_change_id;
+                if (!String.IsNullOrEmpty(result)) return result;
             }
 
             return default;

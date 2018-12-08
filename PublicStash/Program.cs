@@ -2,17 +2,12 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using PathOfExile.Model.Items;
-using PathOfExile.Model.Items.Cards;
-using PathOfExile.Model.Items.Currencies;
-using PathOfExile.Model.Items.Currencies.Prophecies;
+using PathOfExile.Model.Items.Weapons;
 
 namespace PathOfExile
 {
     class Program
     {
-        public static Stopwatch watch = new Stopwatch();
-
 
         public static void Main(String[] args)
         {
@@ -25,6 +20,7 @@ namespace PathOfExile
 
         public static void Run()
         {
+            var watch = new Stopwatch();
             var iterations = 0;
             // Todo Add CancellationToken
             while (true)
@@ -34,23 +30,44 @@ namespace PathOfExile
                 //var g = PublicStashAPI.GetAsync("137293499-143655459-134858781-155093696-145277041").Result;
                 var g = PublicStashAPI.GetAsync(id).Result;
 
-                var unspecified = g.stashes.SelectMany(e => e.items.Select(item =>
-                {
-                    if ( item is UnspecifiedItem c && c.socketedItems != null && c.socketedItems.Any()) return c;
-                    return null;
-                })).Where(i => i != null).ToList();
 
-                //if (unspecified.Any())
+
+                var weapons = g.stashes
+                    .SelectMany(e => e.items.Select(item => item is Weapon ? item : null))
+                    .Where(i => i != null)
+                    .ToList();
+
+
+                //var essence = g.stashes
+                //    .SelectMany(e => e.items.Select(item => item is Essence ? item : null))
+                //    .Where(i => i != null)
+                //    .ToList();
+
+                //var unspecified = g.stashes.SelectMany(e => e.items.Select(item =>
                 //{
+                //    if ( item is UnspecifiedItem c && c.socketedItems != null && c.socketedItems.Any() ) return c;
+                //    return null;
+                //})).Where(i => i != null).ToList();
 
-                //}
-                
-                //var currency = g.stashes.SelectMany(e => e.items.Select(item =>
+                //var prophecies = g.stashes.SelectMany(e => e.items.Select(item =>
                 //{
                 //    if ( item is Prophecy c ) return c;
                 //    return null;
                 //})).Where(i => i != null).ToList();
 
+                //var fossils = g.stashes.SelectMany(e => e.items.Select(item =>
+                //{
+                //    if ( item is Fossil c ) return c;
+                //    return null;
+                //})).Where(i => i != null).ToList();
+
+                //var resonators = g.stashes.SelectMany(e => e.items.Select(item =>
+                //{
+                //    if ( item is Resonator c ) return c;
+                //    return null;
+                //})).Where(i => i != null).ToList();
+
+                watch.Stop();
                 Thread.Sleep(10000);
                 iterations++;
             }

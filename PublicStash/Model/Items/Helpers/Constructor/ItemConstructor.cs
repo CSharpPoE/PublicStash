@@ -20,11 +20,12 @@ namespace PathOfExile.Model.Internal
             Builders = new Dictionary<String, IJsonBuilder<Item>>
             {
                 ["Currency"] = new CurrencyBuilder(),
-                ["Divination"] = new CardBuilder()
+                ["Divination"] = new CardBuilder(),
+                ["Weapons"] = new WeaponBuilder()
             };
         }
         
-        public Item Construct(JObject obj)
+        public Item ConstructFrom(JObject obj)
         {
             return Builders.TryGetValue(Parser.Parse(obj), out var builder)
                 ? builder.For(obj).Build()

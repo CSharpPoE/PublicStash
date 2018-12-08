@@ -1,59 +1,116 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PathOfExile.Model.Items
 {
     public abstract class Item
     {
-        public string id { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("name")]
         public string name { get; set; }
-        public string note { get; set; }
-        public string typeLine { get; set; }
-        public int frameType { get; set; }
-        public int ilvl { get; set; }
-        public bool identified { get; set; }
-        public bool verified { get; set; }
-        public string league { get; set; }
-        public string icon { get; set; }
-        public int h { get; set; }
-        public int w { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
+
+        [JsonProperty("note")]
+        public string Note { get; set; }
+
+        [JsonProperty("typeLine")]
+        public string TypeLine { get; set; }
+
+        [JsonProperty("frameType")]
+        public int FrameType { get; set; }
+
+        [JsonProperty("ilvl")]
+        public int Ilvl { get; set; }
+
+        [JsonProperty("identified")]
+        public bool Identified { get; set; }
+
+        [JsonProperty("verified")]
+        public bool Verified { get; set; }
+
+        [JsonProperty("league")]
+        public string League { get; set; }
+
+        [JsonProperty("icon")]
+        public string Icon { get; set; }
+
+        [JsonProperty("h")]
+        public int H { get; set; }
+
+        [JsonProperty("w")]
+        public int W { get; set; }
+
+        [JsonProperty("x")]
+        public int X { get; set; }
+
+        [JsonProperty("y")]
+        public int Y { get; set; }
 
         public class Socket
         {
-            public int group { get; set; }
-            public string attr { get; set; }
-            public string sColour { get; set; }
+            [JsonProperty("group")]
+            public int Group { get; set; }
+
+            [JsonProperty("attr")]
+            public string Attr { get; set; }
+
+            [JsonProperty("sColour")]
+            public string SColour { get; set; }
         }
 
         public class Property
         {
-            public string name { get; set; }
-            public IEnumerable<IEnumerable<object>> values { get; set; }
-            public int displayMode { get; set; }
-            public int type { get; set; }
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("values")]
+            public IEnumerable<IEnumerable<object>> Values { get; set; }
+
+            [JsonProperty("displayMode")]
+            public int DisplayMode { get; set; }
+
+            [JsonProperty("type")]
+            public int Type { get; set; }
         }
 
         public class AdditionalProperty
         {
-            public string name { get; set; }
-            public IEnumerable<IEnumerable<object>> values { get; set; }
-            public int displayMode { get; set; }
-            public int progress { get; set; }
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("values")]
+            public IEnumerable<IEnumerable<object>> Values { get; set; }
+
+            [JsonProperty("displayMode")]
+            public int DisplayMode { get; set; }
+
+            [JsonProperty("progress")]
+            public int Progress { get; set; }
         }
 
         public class Requirement
         {
-            public string name { get; set; }
-            public IEnumerable<IEnumerable<object>> values { get; set; }
-            public int displayMode { get; set; }
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("values")]
+            public IEnumerable<IEnumerable<object>> Values { get; set; }
+
+            [JsonProperty("displayMode")]
+            public int DisplayMode { get; set; }
         }
 
         public class NextLevelRequirement
         {
-            public string name { get; set; }
-            public IEnumerable<IEnumerable<object>> values { get; set; }
-            public int displayMode { get; set; }
+            [JsonProperty("name")]
+            public string Name { get; set; }
+
+            [JsonProperty("values")]
+            public IEnumerable<IEnumerable<object>> Values { get; set; }
+
+            [JsonProperty("displayMode")]
+            public int DisplayMode { get; set; }
         }
     }
 }

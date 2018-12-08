@@ -7,6 +7,8 @@ namespace PathOfExile.Model.Internal
 {
     internal class ItemConverter : JsonConverter
     {
+        private static readonly IConstructor<JObject, Item> ItemConstructor = new ItemConstructor();
+
         public override bool CanWrite => false;
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -14,12 +16,11 @@ namespace PathOfExile.Model.Internal
             throw new NotImplementedException();
         }
 
-        private static readonly IConstructor<JObject, Item> ItemConstructor = new ItemConstructor();
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            return ItemConstructor.Construct(JObject.Load(reader));
+            return ItemConstructor.ConstructFrom(JObject.Load(reader));
         }
 
         public override bool CanConvert(Type objectType) => objectType == typeof(Item);

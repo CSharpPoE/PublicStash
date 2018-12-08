@@ -4,10 +4,10 @@ using Newtonsoft.Json.Linq;
 
 namespace PathOfExile.Model.Internal
 {
-    internal class JsonParser : IJsonParser
+    class WeaponParser : IJsonParser
     {
-        private const String IconPattern = @"http://web.poecdn.com/image/Art/2DItems/(?<itemType>\w+)";
-        private const String IconGroup = "itemType";
+        private const String IconPattern = @"http://web.poecdn.com/image/Art/2DItems/Weapons/(?<weaponType>\w+)";
+        private const String IconGroup = "weaponType";
 
         public string Parse(JObject obj)
         {
