@@ -2,13 +2,17 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Newtonsoft.Json;
+using PathOfExile.Model.Items;
+using PathOfExile.Model.Items.Gems.Active;
+using PathOfExile.Model.Items.Gems.Support;
+using PathOfExile.Model.Items.Gems.Vaal;
 using PathOfExile.Model.Items.Weapons;
 
 namespace PathOfExile
 {
     class Program
     {
-
         public static void Main(String[] args)
         {
             //var t = PublicStashAPI.GetLatestStashIdAsync().Result;
@@ -18,6 +22,11 @@ namespace PathOfExile
             //regex();
         }
 
+        private static readonly JsonSerializerSettings DefaultResolver = new JsonSerializerSettings
+        {
+            ContractResolver = new DefaultResolver()
+        };
+
         public static void Run()
         {
             var watch = new Stopwatch();
@@ -26,46 +35,25 @@ namespace PathOfExile
             while (true)
             {
                 watch.Restart();
+
                 var id = PublicStashAPI.GetLatestStashIdAsync().Result;
                 //var g = PublicStashAPI.GetAsync("137293499-143655459-134858781-155093696-145277041").Result;
                 var g = PublicStashAPI.GetAsync(id).Result;
 
-
-
-                var weapons = g.stashes
-                    .SelectMany(e => e.items.Select(item => item is Weapon ? item : null))
+                var activeGems = g.stashes
+                    .SelectMany(e => e.items.Select(i => i is ActiveGem item ? item : null))
                     .Where(i => i != null)
                     .ToList();
 
+                var supportGems = g.stashes
+                    .SelectMany(e => e.items.Select(i => i is SupportGem item ? item : null))
+                    .Where(i => i != null)
+                    .ToList();
 
-                //var essence = g.stashes
-                //    .SelectMany(e => e.items.Select(item => item is Essence ? item : null))
-                //    .Where(i => i != null)
-                //    .ToList();
-
-                //var unspecified = g.stashes.SelectMany(e => e.items.Select(item =>
-                //{
-                //    if ( item is UnspecifiedItem c && c.socketedItems != null && c.socketedItems.Any() ) return c;
-                //    return null;
-                //})).Where(i => i != null).ToList();
-
-                //var prophecies = g.stashes.SelectMany(e => e.items.Select(item =>
-                //{
-                //    if ( item is Prophecy c ) return c;
-                //    return null;
-                //})).Where(i => i != null).ToList();
-
-                //var fossils = g.stashes.SelectMany(e => e.items.Select(item =>
-                //{
-                //    if ( item is Fossil c ) return c;
-                //    return null;
-                //})).Where(i => i != null).ToList();
-
-                //var resonators = g.stashes.SelectMany(e => e.items.Select(item =>
-                //{
-                //    if ( item is Resonator c ) return c;
-                //    return null;
-                //})).Where(i => i != null).ToList();
+                var vaalGems = g.stashes
+                    .SelectMany(e => e.items.Select(i => i is VaalGem item ? item : null))
+                    .Where(i => i != null)
+                    .ToList();
 
                 watch.Stop();
                 Thread.Sleep(10000);

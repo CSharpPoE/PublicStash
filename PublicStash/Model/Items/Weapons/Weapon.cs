@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using PathOfExile.Model.Internal;
 
 namespace PathOfExile.Model.Items.Weapons
 {
@@ -38,8 +39,8 @@ namespace PathOfExile.Model.Items.Weapons
         [JsonProperty("shaper")]
         public bool Shaper { get; set; }
 
-        [JsonConverter(typeof(SockatableConverter))]
         [JsonProperty("socketedItems")]
-        public IEnumerable<SocketableItem> SocketedItems { get; set; }
+        [JsonConverter(typeof(SocketedItemConverter))]
+        public IEnumerable<Item> SocketedItems { get; set; }
     }
 }

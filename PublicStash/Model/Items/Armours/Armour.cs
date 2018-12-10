@@ -2,9 +2,9 @@
 using Newtonsoft.Json;
 using PathOfExile.Model.Internal;
 
-namespace PathOfExile.Model.Items.Armour
+namespace PathOfExile.Model.Items.Armours
 {
-    public abstract class Armour : Item
+    public class Armour : Item
     {
         public class Category
         {
@@ -21,7 +21,7 @@ namespace PathOfExile.Model.Items.Armour
         public bool elder { get; set; }
         public bool shaper { get; set; }
 
-        [JsonConverter(typeof(ItemConverter))]
-        public IEnumerable<SocketableItem> socketedItems { get; set; }
+        [JsonConverter(typeof(SocketedItemConverter))]
+        public IEnumerable<Item> socketedItems { get; set; }
     }
 }

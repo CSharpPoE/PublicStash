@@ -41,6 +41,7 @@ namespace PathOfExile
 
         private static readonly JsonSerializerSettings DefaultResolver = new JsonSerializerSettings
         {
+            TypeNameHandling = TypeNameHandling.All,
             ContractResolver = new DefaultResolver()
         };
 
@@ -129,7 +130,8 @@ namespace PathOfExile
         protected override JsonContract CreateContract(Type objectType)
         {
             var contract = base.CreateContract(objectType);
-            if (objectType == typeof(Item)) contract.Converter = new ItemConverter();
+            if (objectType == typeof(Item) || objectType.IsSubclassOf(typeof(Item)))
+                contract.Converter = new ItemConverter();
             return contract;
         }
     }
