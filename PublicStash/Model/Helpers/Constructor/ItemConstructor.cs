@@ -24,7 +24,11 @@ namespace PathOfExile.Model.Internal
                 ["Rings"] = new RingBuilder(),
                 ["Amulets"] = new AmuletBuilder(),
                 ["Weapons"] = new WeaponBuilder(),
-                ["Gems"] = new GemBuilder()
+                ["Armours"] = new ArmourBuilder(),
+                ["Gems"] = new GemBuilder(),
+                ["Belts"] = new BeltBuilder(),
+                ["Jewels"] = new JewelBuilder(),
+                ["Quivers"] = new QuiverBuilder()
             };
         }
 

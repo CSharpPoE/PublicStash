@@ -1,21 +1,36 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using PathOfExile.Model.Internal;
 
 namespace PathOfExile.Model.Items.Currencies
 {
-    public class Currency : Item
+    public abstract class Currency : Item
     {
-        public IEnumerable<Property> properties { get; set; }
-        public IEnumerable<string> explicitMods { get; set; }
-        public string descrText { get; set; }
-        public int stackSize { get; set; }
-        public bool maxStackSize { get; set; }
-        public string inventoryId { get; set; }
-        public Category category { get; set; }
+        [JsonProperty("properties")]
+        public IEnumerable<Property> Properties { get; set; }
 
-        public class Category
+        [JsonProperty("explicitMods")]
+        public IEnumerable<string> ExplicitMods { get; set; }
+
+        [JsonProperty("descrText")]
+        public string DescrText { get; set; }
+
+        [JsonProperty("stackSize")]
+        public int StackSize { get; set; }
+
+        [JsonProperty("maxStackSize")]
+        public bool MaxStackSize { get; set; }
+
+        [JsonProperty("inventoryId")]
+        public string InventoryId { get; set; }
+
+        [JsonProperty("category")]
+        public CurrencyCategory Category { get; set; }
+
+        public class CurrencyCategory
         {
-            public List<object> currency { get; set; }
+            [JsonProperty("currency")]
+            public List<object> Currency { get; set; }
         }
     }
 

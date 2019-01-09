@@ -3,11 +3,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PathOfExile.Model.Items;
+using PathOfExile.Model.Items.Armours.Shields;
 using PathOfExile.Model.Items.Gems.Active;
 using PathOfExile.Model.Items.Gems.Support;
 using PathOfExile.Model.Items.Gems.Vaal;
-using PathOfExile.Model.Items.Weapons;
+using PathOfExile.Model.Items.Jewels;
+using PathOfExile.Model.Items.Quivers;
+using PathOfExile.Model.Items.Weapons.OneHanded.Daggers;
 
 namespace PathOfExile
 {
@@ -15,8 +19,12 @@ namespace PathOfExile
     {
         public static void Main(String[] args)
         {
+            //Test();
+            SpecificTest();
+            //Run();
+
+
             //var t = PublicStashAPI.GetLatestStashIdAsync().Result;
-            Run();
             //CheckForBugs();
             //CheckForBugs2();
             //regex();
@@ -40,6 +48,21 @@ namespace PathOfExile
                 //var g = PublicStashAPI.GetAsync("137293499-143655459-134858781-155093696-145277041").Result;
                 var g = PublicStashAPI.GetAsync(id).Result;
 
+                var shields = g.stashes
+                    .SelectMany(e => e.items.Select(i => i is Shield item ? item : null))
+                    .Where(i => i != null)
+                    .ToList();
+
+                var esShields = g.stashes
+                    .SelectMany(e => e.items.Select(i => i is EnergyShieldShield item ? item : null))
+                    .Where(i => i != null)
+                    .ToList();
+
+                var daggers = g.stashes
+                    .SelectMany(e => e.items.Select(i => i is OneHandDagger item ? item : null))
+                    .Where(i => i != null)
+                    .ToList();
+
                 var activeGems = g.stashes
                     .SelectMany(e => e.items.Select(i => i is ActiveGem item ? item : null))
                     .Where(i => i != null)
@@ -55,10 +78,74 @@ namespace PathOfExile
                     .Where(i => i != null)
                     .ToList();
 
+                var jewels = g.stashes
+                    .SelectMany(e => e.items.Select(i => i is Jewel item ? item : null))
+                    .Where(i => i != null)
+                    .ToList();
+
+                var abyssJewels = g.stashes
+                    .SelectMany(e => e.items.Select(i => i is AbyssJewel item ? item : null))
+                    .Where(i => i != null)
+                    .ToList();
+
+                var unspecifiedItems = g.stashes
+                    .SelectMany(e => e.items.Select(i => i is UnspecifiedItem item ? item : null))
+                    .Where(i => i != null)
+                    .ToList();
+
+                var nullItems = g.stashes
+                    .SelectMany(e => e.items.Select(i => i))
+                    .Where(i => i == null)
+                    .ToList();
+
                 watch.Stop();
                 Thread.Sleep(10000);
                 iterations++;
             }
+        }
+
+        public static void SpecificTest()
+        {
+            var id = PublicStashAPI.GetLatestStashIdAsync().Result;
+            var g = PublicStashAPI.GetAsync("316327792-327507003-309011650-354203266-334719270").Result;
+            //var g = PublicStashAPI.GetAsync(id).Result;
+
+            var jewels = g.stashes
+                .SelectMany(e => e.items.Select(i => i is Jewel item ? item : null))
+                .Where(i => i != null)
+                .ToList();
+
+            var abyssJewels = g.stashes
+                .SelectMany(e => e.items.Select(i => i is AbyssJewel item ? item : null))
+                .Where(i => i != null)
+                .ToList();
+
+            var unspecifiedItems = g.stashes
+                .SelectMany(e => e.items.Select(i => i is UnspecifiedItem item ? item : null))
+                .Where(i => i != null)
+                .ToList();
+
+            var quiverItems = g.stashes
+                .SelectMany(e => e.items.Select(i => i is Quiver item ? item : null))
+                .Where(i => i != null)
+                .ToList();
+
+            var nullItems = g.stashes
+                .SelectMany(e => e.items.Select(i => i))
+                .Where(i => i == null)
+                .ToList();
+        }
+
+
+        public static void Test()
+        {
+            var json =
+                "{\"verified\":false,\"w\":2,\"h\":2,\"ilvl\":75,\"icon\":\"http://web.poecdn.com/image/Art/2DItems/Armours/Boots/TwoTonedBoots.png?scale=1&scaleIndex=0&w=2&h=2&v=06ee4d5bd2996edf668a2265ff2f181a\",\"league\":\"Betrayal\",\"id\":\"ad06996c3c7eac364870d12ad190701d4ecd56b83a9992608e30afc13d329829\",\"sockets\":[{\"group\":0,\"attr\":\"D\",\"sColour\":\"G\"}],\"name\":\"Behemoth Slippers\",\"typeLine\":\"Two-Toned Boots\",\"identified\":true,\"properties\":[{\"name\":\"Evasion Rating\",\"values\":[[\"198\",1]],\"displayMode\":0,\"type\":17},{\"name\":\"Energy Shield\",\"values\":[[\"38\",1]],\"displayMode\":0,\"type\":18}],\"requirements\":[{\"name\":\"Level\",\"values\":[[\"70\",0]],\"displayMode\":0},{\"name\":\"Dex\",\"values\":[[\"50\",1]],\"displayMode\":1},{\"name\":\"Int\",\"values\":[[\"50\",1]],\"displayMode\":1}],\"implicitMods\":[\"+17% to Cold and Lightning Resistances\"],\"explicitMods\":[\"57% increased Evasion and Energy Shield\",\"+59 to maximum Mana\",\"+41% to Fire Resistance\",\"24% increased Stun and Block Recovery\",\"18% reduced Attribute Requirements\"],\"craftedMods\":[\"11% increased Movement Speed\",\"10% chance to gain Onslaught for 4 seconds on Kill\"],\"frameType\":2,\"category\":{\"armour\":[\"boots\"]},\"x\":0,\"y\":8,\"inventoryId\":\"Stash35\",\"socketedItems\":[]}";
+
+            var builder = new Model.Internal.BootsBuilder();
+            var jObj = JObject.Parse(json);
+
+            var result = builder.For(JObject.Parse(json)).Build();
         }
 
         //public static void regex()

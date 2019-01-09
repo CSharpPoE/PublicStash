@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace PathOfExile.Model.Items.Gems
 {
-    public class Gem : Item
+    public abstract class Gem : Item
     {
         [JsonProperty("support")]
         public bool Support { get; set; }

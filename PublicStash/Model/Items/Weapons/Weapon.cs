@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using PathOfExile.Model.Internal;
 
 namespace PathOfExile.Model.Items.Weapons
 {
-    public abstract class Weapon : Item
+    public abstract class Weapon : Item, Socketable
     {
         public class WeaponCategory
         {
@@ -12,7 +11,6 @@ namespace PathOfExile.Model.Items.Weapons
             public IEnumerable<string> Weapons { get; set; }
         }
 
-        [JsonProperty("sockets")]
         public IEnumerable<Socket> Sockets { get; set; }
 
         [JsonProperty("properties")]
@@ -39,8 +37,6 @@ namespace PathOfExile.Model.Items.Weapons
         [JsonProperty("shaper")]
         public bool Shaper { get; set; }
 
-        [JsonProperty("socketedItems")]
-        [JsonConverter(typeof(SocketedItemConverter))]
         public IEnumerable<Item> SocketedItems { get; set; }
     }
 }

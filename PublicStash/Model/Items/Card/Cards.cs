@@ -1,22 +1,39 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using PathOfExile.Model.Internal;
 
 namespace PathOfExile.Model.Items.Cards
 {
-    public class Card : Item
+    public abstract class Card : Item
     {
-        public IEnumerable<Property> properties { get; set; }
-        public IEnumerable<string> explicitMods { get; set; }
-        public IEnumerable<string> flavourText { get; set; }
-        public int stackSize { get; set; }
-        public bool maxStackSize { get; set; }
-        public string artFilename { get; set; }
-        public Category category { get; set; }
-        public string inventoryId { get; set; }
+        [JsonProperty("properties")]
+        public IEnumerable<Property> Properties { get; set; }
 
-        public class Category
+        [JsonProperty("explicitMods")]
+        public IEnumerable<string> ExplicitMods { get; set; }
+
+        [JsonProperty("flavourText")]
+        public IEnumerable<string> FlavourText { get; set; }
+
+        [JsonProperty("stackSize")]
+        public int StackSize { get; set; }
+
+        [JsonProperty("maxStackSize")]
+        public bool MaxStackSize { get; set; }
+
+        [JsonProperty("artFilename")]
+        public string ArtFilename { get; set; }
+
+        [JsonProperty("category")]
+        public CardCategory Category { get; set; }
+
+        [JsonProperty("inventoryId")]
+        public string InventoryId { get; set; }
+
+        public class CardCategory
         {
-            public List<object> cards { get; set; }
+            [JsonProperty("cards")]
+            public List<object> Cards { get; set; }
         }
     }
 

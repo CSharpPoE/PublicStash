@@ -9,7 +9,7 @@ namespace PathOfExile.Model.Items
         public string Id { get; set; }
 
         [JsonProperty("name")]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("note")]
         public string Note { get; set; }

@@ -10,14 +10,14 @@ namespace PathOfExile.Model.Internal
         private JObject JObject { get; set; }
         private IParser<JObject> Parser { get; }
 
-        private IJsonBuilder<Gem> DefaultBuilder { get; }
+        private IJsonBuilder<Gem> DefaultGemBuilder { get; }
         private IDictionary<String, IJsonBuilder<Gem>> Builders { get; }
 
         public GemBuilder()
         {
             Parser = new GemParser();
 
-            DefaultBuilder = new ActiveGemBuilder();
+            DefaultGemBuilder = new ActiveGemBuilder();
             Builders = new Dictionary<String, IJsonBuilder<Gem>>
             {
                 ["Support"] = new SupportGemBuilder(),
@@ -35,7 +35,7 @@ namespace PathOfExile.Model.Internal
         {
             return Builders.TryGetValue(Parser.Parse(JObject), out var builder)
                 ? builder.For(JObject).Build()
-                : DefaultBuilder.For(JObject).Build();
+                : DefaultGemBuilder.For(JObject).Build();
         }
     }
 }

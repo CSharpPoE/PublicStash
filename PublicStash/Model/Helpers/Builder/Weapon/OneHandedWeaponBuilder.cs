@@ -2,10 +2,10 @@
 
 namespace PathOfExile.Model.Internal
 {
-    internal class OneHandedWeaponBuilder : TBuilder<OneHandedWeapon>
+    internal class OneHandedWeaponBuilder : TBuilder<OneHandWeapon>
     {
         public OneHandedWeaponBuilder() : base(new TypeLineParser(),
-            AttributeHelper.Index<OneHandedWeaponAttribute>())
+            AttributeHelper.Index<OneHandWeaponAttribute>())
         {
         }
     }

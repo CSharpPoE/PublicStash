@@ -2,7 +2,7 @@
 
 namespace PathOfExile.Model.Items.Gems.Active
 {
-    public class ActiveGem : Gem
+    public abstract class ActiveGem : Gem
     {
     }
 

@@ -1,12 +1,13 @@
-﻿using PathOfExile.Model.Internal;
+﻿using System.Collections.Generic;
+using PathOfExile.Model.Internal;
 
 namespace PathOfExile.Model.Items.Amulets
 {
-    public class Amulet : Item
+    public abstract class Amulet : Item
     {
     }
 
-    public class Talisman : Amulet
+    public abstract class Talisman : Amulet
     {
     }
 
@@ -87,8 +88,10 @@ namespace PathOfExile.Model.Items.Amulets
     }
 
     [Talisman("Black Maw Talisman")]
-    public class BlackMawTalisman : Talisman
+    public class BlackMawTalisman : Talisman, Socketable
     {
+        public IEnumerable<Socket> Sockets { get; set; }
+        public IEnumerable<Item> SocketedItems { get; set; }
     }
 
     [Talisman("Bonespire Talisman")]

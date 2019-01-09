@@ -95,7 +95,6 @@ namespace PathOfExile
         /// <summary>
         /// Does a GET to the path of exile public stash api with id as the query
         /// </summary>
-        /// <param name="id">unique id for the public stash data set to be fetched</param>
         /// <returns></returns>
         public static async Task<PublicStash> GetAsync(String id) =>
             await GetAsync<PublicStash>(await Http.Instance.GetAsync($"{POE_API_PUBLIC_STASH_URL}?id={id}"));
@@ -118,8 +117,6 @@ namespace PathOfExile
         /// <summary>
         /// Takes a HttpResponseMessage as a parameter and returns the deserialized content from the request.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="response"></param>
         /// <returns></returns>
         private static async Task<T> GetAsync<T>(HttpResponseMessage response) =>
             JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync(), DefaultResolver);

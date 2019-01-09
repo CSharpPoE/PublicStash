@@ -2,7 +2,7 @@
 
 namespace PathOfExile.Model.Items.Gems.Support
 {
-    public class SupportGem : Gem
+    public abstract class SupportGem : Gem
     {
     }
 

@@ -9,8 +9,7 @@ namespace PathOfExile.Model.Internal
     {
         private JObject JObject { get; set; }
         private IParser<JObject> Parser { get; }
-
-        IDictionary<String, Type> Types { get; }
+        private IDictionary<String, Type> Types { get; }
 
         protected TBuilder(IParser<JObject> parser, IDictionary<String, Type> typeDict)
         {
@@ -23,7 +22,7 @@ namespace PathOfExile.Model.Internal
             JObject = obj;
             return this;
         }
-
+        
         public TItem Build()
         {
             if (Types.TryGetValue(Parser.Parse(JObject), out var tClass))

@@ -2,7 +2,7 @@
 
 namespace PathOfExile.Model.Items.Currencies.Breach
 {
-    public class Splinter : Currency
+    public abstract class Splinter : Currency
     {
     }
 

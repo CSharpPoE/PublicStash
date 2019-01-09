@@ -1,9 +1,17 @@
-﻿using PathOfExile.Model.Internal;
+﻿using System.Collections.Generic;
+using PathOfExile.Model.Internal;
 
 namespace PathOfExile.Model.Items.Rings
 {
-    public class Ring : Item
+    public abstract class Ring : Item
     {
+    }
+
+    [Ring("Unset Ring")]
+    public class UnsetRing : Ring, Socketable
+    {
+        public IEnumerable<Socket> Sockets { get; set; }
+        public IEnumerable<Item> SocketedItems { get; set; }
     }
 
     [Ring("Breach Ring")]
@@ -23,11 +31,6 @@ namespace PathOfExile.Model.Items.Rings
 
     [Ring("Paua Ring")]
     public class PauaRing : Ring
-    {
-    }
-
-    [Ring("Unset Ring")]
-    public class UnsetRing : Ring
     {
     }
 

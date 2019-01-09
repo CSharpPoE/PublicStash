@@ -2,7 +2,7 @@
 
 namespace PathOfExile.Model.Items.Currencies.Prophecies
 {
-    public class Prophecy : Currency
+    public abstract class Prophecy : Currency
     {
     }
 

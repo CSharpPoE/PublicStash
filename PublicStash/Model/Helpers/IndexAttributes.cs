@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace PathOfExile.Model.Internal
 {
     public static class AttributeHelper
     {
+        private static IDictionary<Type, IDictionary<String, Type>> IndexCache { get; }
+
+        static AttributeHelper() => IndexCache = new Dictionary<Type, IDictionary<String, Type>>();
+
         internal static IDictionary<String, Type> Index<T>() where T : ItemAttribute
         {
+            if (IndexCache.TryGetValue(typeof(T), out var dict)) return dict;
             var typeDict = new Dictionary<String, Type>();
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().AsParallel())
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                foreach (var type in assembly.GetTypes().AsParallel())
+                foreach (var type in assembly.GetTypes())
                 {
                     var value = type.GetCustomAttribute<T>()?.Value;
                     if (!String.IsNullOrEmpty(value))
@@ -22,6 +26,7 @@ namespace PathOfExile.Model.Internal
                 }
             }
 
+            IndexCache.Add(typeof(T), typeDict);
             return typeDict;
         }
     }
@@ -112,44 +117,44 @@ namespace PathOfExile.Model.Internal
 
     #region Two Handed
 
-    internal class TwoHandedWeaponAttribute : WeaponAttribute
+    internal class TwoHandWeaponAttribute : WeaponAttribute
     {
-        protected TwoHandedWeaponAttribute(string value) : base(value)
+        protected TwoHandWeaponAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class TwoHandedSwordAttribute : TwoHandedWeaponAttribute
+    internal class TwoHandSwordAttribute : TwoHandWeaponAttribute
     {
-        public TwoHandedSwordAttribute(string value) : base(value)
+        public TwoHandSwordAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class TwoHandedAxeAttribute : TwoHandedWeaponAttribute
+    internal class TwoHandAxeAttribute : TwoHandWeaponAttribute
     {
-        public TwoHandedAxeAttribute(string value) : base(value)
+        public TwoHandAxeAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class TwoHandedMaceAttribute : TwoHandedWeaponAttribute
+    internal class TwoHandMaceAttribute : TwoHandWeaponAttribute
     {
-        public TwoHandedMaceAttribute(string value) : base(value)
+        public TwoHandMaceAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class TwoHandedBowAttribute : TwoHandedWeaponAttribute
+    internal class TwoHandBowAttribute : TwoHandWeaponAttribute
     {
-        public TwoHandedBowAttribute(string value) : base(value)
+        public TwoHandBowAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class TwoHandedStaffAttribute : TwoHandedWeaponAttribute
+    internal class TwoHandStaffAttribute : TwoHandWeaponAttribute
     {
-        public TwoHandedStaffAttribute(string value) : base(value)
+        public TwoHandStaffAttribute(string value) : base(value)
         {
         }
     }
@@ -158,65 +163,65 @@ namespace PathOfExile.Model.Internal
 
     #region One Handed
 
-    internal class OneHandedWeaponAttribute : WeaponAttribute
+    internal class OneHandWeaponAttribute : WeaponAttribute
     {
-        protected OneHandedWeaponAttribute(string value) : base(value)
+        protected OneHandWeaponAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class OneHandedSwordAttribute : OneHandedWeaponAttribute
+    internal class OneHandSwordAttribute : OneHandWeaponAttribute
     {
-        public OneHandedSwordAttribute(string value) : base(value)
+        public OneHandSwordAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class OneHandedThrustingSwordAttribute : OneHandedWeaponAttribute
+    internal class OneHandThrustingSwordAttribute : OneHandWeaponAttribute
     {
-        public OneHandedThrustingSwordAttribute(string value) : base(value)
+        public OneHandThrustingSwordAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class OneHandedAxeAttribute : OneHandedWeaponAttribute
+    internal class OneHandAxeAttribute : OneHandWeaponAttribute
     {
-        public OneHandedAxeAttribute(string value) : base(value)
+        public OneHandAxeAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class OneHandedMaceAttribute : OneHandedWeaponAttribute
+    internal class OneHandMaceAttribute : OneHandWeaponAttribute
     {
-        public OneHandedMaceAttribute(string value) : base(value)
+        public OneHandMaceAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class OneHandedDaggerAttribute : OneHandedWeaponAttribute
+    internal class OneHandDaggerAttribute : OneHandWeaponAttribute
     {
-        public OneHandedDaggerAttribute(string value) : base(value)
+        public OneHandDaggerAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class OneHandedClawAttribute : OneHandedWeaponAttribute
+    internal class OneHandClawAttribute : OneHandWeaponAttribute
     {
-        public OneHandedClawAttribute(string value) : base(value)
+        public OneHandClawAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class OneHandedWandAttribute : OneHandedWeaponAttribute
+    internal class OneHandWandAttribute : OneHandWeaponAttribute
     {
-        public OneHandedWandAttribute(string value) : base(value)
+        public OneHandWandAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class OneHandedSceptreAttribute : OneHandedWeaponAttribute
+    internal class OneHandSceptreAttribute : OneHandWeaponAttribute
     {
-        public OneHandedSceptreAttribute(string value) : base(value)
+        public OneHandSceptreAttribute(string value) : base(value)
         {
         }
     }
@@ -304,177 +309,160 @@ namespace PathOfExile.Model.Internal
         }
     }
 
-    internal class BodyArmourArmourAttribute : BodyArmourAttribute
+    internal class ArmourBodyArmourAttribute : BodyArmourAttribute
     {
-        public BodyArmourArmourAttribute(string value) : base(value)
+        public ArmourBodyArmourAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BodyArmourEvasionAttribute : BodyArmourAttribute
+    internal class EvasionBodyArmourAttribute : BodyArmourAttribute
     {
-        public BodyArmourEvasionAttribute(string value) : base(value)
+        public EvasionBodyArmourAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BodyArmourEnergyShieldAttribute : BodyArmourAttribute
+    internal class EnergyShieldBodyArmourAttribute : BodyArmourAttribute
     {
-        public BodyArmourEnergyShieldAttribute(string value) : base(value)
+        public EnergyShieldBodyArmourAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BodyArmourArmourEvasionAttribute : BodyArmourAttribute
+    internal class ArmourEvasionBodyArmourAttribute : BodyArmourAttribute
     {
-        public BodyArmourArmourEvasionAttribute(string value) : base(value)
+        public ArmourEvasionBodyArmourAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BodyArmourArmourEnergyShieldAttribute : BodyArmourAttribute
+    internal class ArmourEnergyShieldBodyArmourAttribute : BodyArmourAttribute
     {
-        public BodyArmourArmourEnergyShieldAttribute(string value) : base(value)
+        public ArmourEnergyShieldBodyArmourAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BodyArmourEnergyShieldEvasionAttribute : BodyArmourAttribute
+    internal class EnergyShieldEvasionBodyArmourAttribute : BodyArmourAttribute
     {
-        public BodyArmourEnergyShieldEvasionAttribute(string value) : base(value)
+        public EnergyShieldEvasionBodyArmourAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BodyArmourArmourEvasionEnergyShieldAttribute : BodyArmourAttribute
+    internal class ArmourEvasionEnergyShieldBodyArmourAttribute : BodyArmourAttribute
     {
-        public BodyArmourArmourEvasionEnergyShieldAttribute(string value) : base(value)
+        public ArmourEvasionEnergyShieldBodyArmourAttribute(string value) : base(value)
         {
         }
     }
-
 
     #endregion
 
-    #region Boot
+    #region Boots
 
-    internal class BootAttribute : ArmourAttribute
+    internal class BootsAttribute : ArmourAttribute
     {
-        protected BootAttribute(string value) : base(value)
+        protected BootsAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BootArmourAttribute : BootAttribute
+    internal class ArmourBootsAttribute : BootsAttribute
     {
-        public BootArmourAttribute(string value) : base(value)
+        public ArmourBootsAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BootEvasionAttribute : BootAttribute
+    internal class EvasionBootsAttribute : BootsAttribute
     {
-        public BootEvasionAttribute(string value) : base(value)
+        public EvasionBootsAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BootEnergyShieldAttribute : BootAttribute
+    internal class EnergyShieldBootsAttribute : BootsAttribute
     {
-        public BootEnergyShieldAttribute(string value) : base(value)
+        public EnergyShieldBootsAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BootArmourEvasionAttribute : BootAttribute
+    internal class ArmourEvasionBootsAttribute : BootsAttribute
     {
-        public BootArmourEvasionAttribute(string value) : base(value)
+        public ArmourEvasionBootsAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BootArmourEnergyShieldAttribute : BootAttribute
+    internal class ArmourEnergyShieldBootsAttribute : BootsAttribute
     {
-        public BootArmourEnergyShieldAttribute(string value) : base(value)
+        public ArmourEnergyShieldBootsAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BootEnergyShieldEvasionAttribute : BootAttribute
+    internal class EnergyShieldEvasionBootsAttribute : BootsAttribute
     {
-        public BootEnergyShieldEvasionAttribute(string value) : base(value)
+        public EnergyShieldEvasionBootsAttribute(string value) : base(value)
         {
         }
     }
-
-    internal class BootArmourEvasionEnergyShieldAttribute : BootAttribute
-    {
-        public BootArmourEvasionEnergyShieldAttribute(string value) : base(value)
-        {
-        }
-    }
-
 
     #endregion
 
-    #region Glove
+    #region Gloves
 
-    internal class GloveAttribute : ArmourAttribute
+    internal class GlovesAttribute : ArmourAttribute
     {
-        protected GloveAttribute(string value) : base(value)
+        protected GlovesAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class GloveArmourAttribute : GloveAttribute
+    internal class ArmourGlovesAttribute : GlovesAttribute
     {
-        public GloveArmourAttribute(string value) : base(value)
+        public ArmourGlovesAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class GloveEvasionAttribute : GloveAttribute
+    internal class EvasionGlovesAttribute : GlovesAttribute
     {
-        public GloveEvasionAttribute(string value) : base(value)
+        public EvasionGlovesAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class GloveEnergyShieldAttribute : GloveAttribute
+    internal class EnergyShieldGlovesAttribute : GlovesAttribute
     {
-        public GloveEnergyShieldAttribute(string value) : base(value)
+        public EnergyShieldGlovesAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class GloveArmourEvasionAttribute : GloveAttribute
+    internal class ArmourEvasionGlovesAttribute : GlovesAttribute
     {
-        public GloveArmourEvasionAttribute(string value) : base(value)
+        public ArmourEvasionGlovesAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class GloveArmourEnergyShieldAttribute : GloveAttribute
+    internal class ArmourEnergyShieldGlovesAttribute : GlovesAttribute
     {
-        public GloveArmourEnergyShieldAttribute(string value) : base(value)
+        public ArmourEnergyShieldGlovesAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class GloveEnergyShieldEvasionAttribute : GloveAttribute
+    internal class EnergyShieldEvasionGlovesAttribute : GlovesAttribute
     {
-        public GloveEnergyShieldEvasionAttribute(string value) : base(value)
+        public EnergyShieldEvasionGlovesAttribute(string value) : base(value)
         {
         }
     }
-
-    internal class GloveArmourEvasionEnergyShieldAttribute : GloveAttribute
-    {
-        public GloveArmourEvasionEnergyShieldAttribute(string value) : base(value)
-        {
-        }
-    }
-
 
     #endregion
 
@@ -487,44 +475,44 @@ namespace PathOfExile.Model.Internal
         }
     }
 
-    internal class HelmetArmourAttribute : HelmetAttribute
+    internal class ArmourHelmetAttribute : HelmetAttribute
     {
-        public HelmetArmourAttribute(string value) : base(value)
+        public ArmourHelmetAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class HelmetEvasionAttribute : HelmetAttribute
+    internal class EvasionHelmetAttribute : HelmetAttribute
     {
-        public HelmetEvasionAttribute(string value) : base(value)
-        {
-        }
-    }
-    
-    internal class HelmetEnergyShieldAttribute : HelmetAttribute
-    {
-        public HelmetEnergyShieldAttribute(string value) : base(value)
+        public EvasionHelmetAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class HelmetArmourEvasionAttribute : HelmetAttribute
+    internal class EnergyShieldHelmetAttribute : HelmetAttribute
     {
-        public HelmetArmourEvasionAttribute(string value) : base(value)
-        {
-        }
-    }
-    
-    internal class HelmetArmourEnergyShieldAttribute : HelmetAttribute
-    {
-        public HelmetArmourEnergyShieldAttribute(string value) : base(value)
+        public EnergyShieldHelmetAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class HelmetEnergyShieldEvasionAttribute : HelmetAttribute
+    internal class ArmourEvasionHelmetAttribute : HelmetAttribute
     {
-        public HelmetEnergyShieldEvasionAttribute(string value) : base(value)
+        public ArmourEvasionHelmetAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    internal class ArmourEnergyShieldHelmetAttribute : HelmetAttribute
+    {
+        public ArmourEnergyShieldHelmetAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    internal class EnergyShieldEvasionHelmetAttribute : HelmetAttribute
+    {
+        public EnergyShieldEvasionHelmetAttribute(string value) : base(value)
         {
         }
     }
@@ -535,7 +523,6 @@ namespace PathOfExile.Model.Internal
         {
         }
     }
-
 
     #endregion
 
@@ -548,44 +535,44 @@ namespace PathOfExile.Model.Internal
         }
     }
 
-    internal class ShieldArmourAttribute : ShieldAttribute
+    internal class ArmourShieldAttribute : ShieldAttribute
     {
-        public ShieldArmourAttribute(string value) : base(value)
+        public ArmourShieldAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class ShieldEvasionAttribute : ShieldAttribute
+    internal class EvasionShieldAttribute : ShieldAttribute
     {
-        public ShieldEvasionAttribute(string value) : base(value)
+        public EvasionShieldAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class ShieldEnergyShieldAttribute : ShieldAttribute
+    internal class EnergyShieldShieldAttribute : ShieldAttribute
     {
-        public ShieldEnergyShieldAttribute(string value) : base(value)
+        public EnergyShieldShieldAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class ShieldArmourEvasionAttribute : ShieldAttribute
+    internal class ArmourEvasionShieldAttribute : ShieldAttribute
     {
-        public ShieldArmourEvasionAttribute(string value) : base(value)
+        public ArmourEvasionShieldAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class ShieldArmourEnergyShieldAttribute : ShieldAttribute
+    internal class ArmourEnergyShieldShieldAttribute : ShieldAttribute
     {
-        public ShieldArmourEnergyShieldAttribute(string value) : base(value)
+        public ArmourEnergyShieldShieldAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class ShieldEnergyShieldEvasionAttribute : ShieldAttribute
+    internal class EnergyShieldEvasionShieldAttribute : ShieldAttribute
     {
-        public ShieldEnergyShieldEvasionAttribute(string value) : base(value)
+        public EnergyShieldEvasionShieldAttribute(string value) : base(value)
         {
         }
     }
@@ -597,8 +584,66 @@ namespace PathOfExile.Model.Internal
         }
     }
 
+    #endregion
 
     #endregion
+
+    #region Belt
+
+    internal class BeltAttribute : ItemAttribute
+    {
+        public BeltAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    #endregion
+
+    #region Jewel
+
+    internal class JewelAttribute : ItemAttribute
+    {
+        public JewelAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    internal class AbyssJewelAttribute : JewelAttribute
+    {
+        public AbyssJewelAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    #endregion
+
+    #region Quiver
+
+    internal class QuiverAttribute : ItemAttribute
+    {
+        public QuiverAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    #endregion
+
+
+    #region Map
+
+    internal class MapAttribute : ItemAttribute
+    {
+        protected MapAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    internal class BetrayalMapAttribute : MapAttribute
+    {
+        public BetrayalMapAttribute(string value) : base(value)
+        {
+        }
+    }
 
     #endregion
 }

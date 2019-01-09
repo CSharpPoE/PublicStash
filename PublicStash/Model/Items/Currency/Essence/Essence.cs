@@ -2,7 +2,7 @@
 
 namespace PathOfExile.Model.Items.Currencies.Essence
 {
-    public class Essence : Currency
+    public abstract class Essence : Currency
     {
     }
 

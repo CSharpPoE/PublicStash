@@ -1,16 +1,11 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
 using PathOfExile.Model.Internal;
 
 namespace PathOfExile.Model.Items.Currencies.Delve
 {
-    public class Resonator : Currency
+    public abstract class Resonator : Currency, Socketable
     {
-        [JsonProperty("sockets")]
         public IEnumerable<Socket> Sockets { get; set; }
-
-        [JsonProperty("socketedItems")]
-        [JsonConverter(typeof(SocketedItemConverter))]
         public IEnumerable<Item> SocketedItems { get; set; }
     }
 

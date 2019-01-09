@@ -2,7 +2,7 @@
 
 namespace PathOfExile.Model.Items.Currencies.Delve
 {
-    public class Fossil : Currency
+    public abstract class Fossil : Currency
     {
     }
 

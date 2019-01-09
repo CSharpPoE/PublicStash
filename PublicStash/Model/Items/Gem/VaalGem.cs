@@ -2,7 +2,7 @@
 
 namespace PathOfExile.Model.Items.Gems.Vaal
 {
-    public class VaalGem : Gem
+    public abstract class VaalGem : Gem
     {
     }
 

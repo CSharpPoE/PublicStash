@@ -2,7 +2,7 @@
 
 namespace PathOfExile.Model.Items.Currencies.Breach
 {
-    public class Blessing : Currency
+    public abstract class Blessing : Currency
     {
     }
 
