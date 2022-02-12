@@ -56,27 +56,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassGenerator.cs" />
+    <Compile Include="Model\Helpers\Builder\AccessoryBuilder.cs" />
+    <Compile Include="Model\Helpers\Builder\MapBuilder.cs" />
     <Compile Include="Model\Helpers\Builder\QuiverBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Armour\ArmourBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Armour\ShieldBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Armour\HelmetBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Armour\GlovesBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Armour\BootsBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Armour\BodyArmourBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Gem\VaalGemBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\BeltBuilder.cs" />
+    <Compile Include="Model\Helpers\Builder\ArmourBuilder.cs" />
     <Compile Include="Model\Helpers\Builder\JewelBuilder.cs" />
     <Compile Include="Model\Helpers\Builder\TBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Gem\ActiveGemBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Gem\SupportGemBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Gem\GemBuilder.cs" />
+    <Compile Include="Model\Helpers\Builder\GemBuilder.cs" />
     <Compile Include="Model\Helpers\Converters\SocketedItemConverter.cs" />
-    <Compile Include="Model\Helpers\Parser\GemParser.cs" />
-    <Compile Include="Model\Helpers\Parser\BootsParser.cs" />
+    <Compile Include="Model\Helpers\Parser\BaseTypeParser.cs" />
     <Compile Include="Model\Helpers\NameMapping.cs" />
-    <Compile Include="Model\Helpers\Parser\TypeLineParser.cs" />
     <Compile Include="Model\Helpers\Parser\ArmourParser.cs" />
-    <Compile Include="Model\Items\Amulet\Amulet.cs" />
+    <Compile Include="Model\Items\Accessories\Accessory.cs" />
+    <Compile Include="Model\Items\Accessories\Amulet\Amulet.cs" />
     <Compile Include="Model\Items\Armour\Armour.cs" />
     <Compile Include="Model\Items\Armour\BodyArmour\BodyArmour.cs" />
     <Compile Include="Model\Items\Armour\BodyArmour\EnergyShield\EnergyShield.cs" />
@@ -115,17 +108,12 @@
     <Compile Include="Model\Items\Armour\Shield\EnergyShieldEvasion\EnergyShieldEvasion.cs" />
     <Compile Include="Model\Items\Armour\Shield\Evasion\Evasion.cs" />
     <Compile Include="Model\Items\Armour\Shield\Shield.cs" />
-    <Compile Include="Model\Items\Belts\Belt.cs" />
+    <Compile Include="Model\Items\Accessories\Belt\Belt.cs" />
     <Compile Include="Model\Items\Currency\Breach\Splinter.cs" />
     <Compile Include="Model\Items\Currency\Delve\Fossil.cs" />
     <Compile Include="Model\Items\Currency\Delve\Resonator.cs" />
     <Compile Include="Model\Items\Currency\Essence\Essence.cs" />
-    <Compile Include="Model\Helpers\Builder\AmuletBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\RingBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Weapon\TwoHandedWeaponBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Weapon\OneHandedWeaponBuilder.cs" />
-    <Compile Include="Model\Helpers\Builder\Weapon\WeaponBuilder.cs" />
-    <Compile Include="Model\Helpers\Parser\WeaponParser.cs" />
+    <Compile Include="Model\Helpers\Builder\WeaponBuilder.cs" />
     <Compile Include="Model\Items\Gem\Gem.cs" />
     <Compile Include="Model\Items\Gem\ActiveGem.cs" />
     <Compile Include="Model\Items\Gem\SupportGem.cs" />
@@ -142,10 +130,17 @@
     <Compile Include="Model\Helpers\Constructor\ItemConstructor.cs" />
     <Compile Include="Model\Helpers\IndexAttributes.cs" />
     <Compile Include="Model\Helpers\Parser\JsonParser.cs" />
+    <Compile Include="Model\Items\Jewel\Abyss\AbyssJewel.cs" />
+    <Compile Include="Model\Items\Jewel\Cluster\ClusterJewel.cs" />
     <Compile Include="Model\Items\Jewel\Jewel.cs" />
+    <Compile Include="Model\Items\Map\Blight\BlightMap.cs" />
+    <Compile Include="Model\Items\Map\Breachstone\Breachstone.cs" />
+    <Compile Include="Model\Items\Map\Emblem\LegionEmblem.cs" />
+    <Compile Include="Model\Items\Map\Invitation\Invitation.cs" />
     <Compile Include="Model\Items\Map\Map.cs" />
+    <Compile Include="Model\Items\Map\Scarab\Scarab.cs" />
     <Compile Include="Model\Items\Quiver\Quiver.cs" />
-    <Compile Include="Model\Items\Ring\Ring.cs" />
+    <Compile Include="Model\Items\Accessories\Ring\Ring.cs" />
     <Compile Include="Model\Items\Weapons\OneHand\Axe\Axe.cs" />
     <Compile Include="Model\Items\Weapons\OneHand\Claw\Claw.cs" />
     <Compile Include="Model\Items\Weapons\OneHand\Dagger\Dagger.cs" />
@@ -183,6 +178,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\Items\Map\Simulacrum\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

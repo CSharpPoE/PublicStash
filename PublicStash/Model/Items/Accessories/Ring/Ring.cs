@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using PathOfExile.Model.Internal;
 
-namespace PathOfExile.Model.Items.Rings
+namespace PathOfExile.Model.Items.Accessories.Rings
 {
-    public abstract class Ring : Item
+    public abstract class Ring : Accessory
     {
     }
 
@@ -16,6 +16,11 @@ namespace PathOfExile.Model.Items.Rings
 
     [Ring("Breach Ring")]
     public class BreachRing : Ring
+    {
+    }
+
+    [Ring("Cerulean Ring")]
+    public class CeruleanRing : Ring
     {
     }
 
@@ -96,6 +101,15 @@ namespace PathOfExile.Model.Items.Rings
 
     [Ring("Jet Ring")]
     public class JetRing : Ring
+    {
+    }
+
+    [Ring("Iolite Ring")]
+    public class IoliteRing : Ring
+    {
+    }
+    [Ring("Vermillion Ring")]
+    public class VermillionRing : Ring
     {
     }
 }

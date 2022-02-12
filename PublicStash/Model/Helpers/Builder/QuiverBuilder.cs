@@ -4,7 +4,7 @@ namespace PathOfExile.Model.Internal
 {
     internal class QuiverBuilder : TBuilder<Quiver>
     {
-        public QuiverBuilder() : base(new TypeLineParser(), AttributeHelper.Index<QuiverAttribute>())
+        public QuiverBuilder() : base(new BaseTypeParser(), AttributeHelper.Index<QuiverAttribute>())
         {
         }
     }

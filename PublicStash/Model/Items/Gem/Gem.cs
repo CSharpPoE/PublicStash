@@ -26,16 +26,7 @@ namespace PathOfExile.Model.Items.Gems
         [JsonProperty("descrText")]
         public string DescrText { get; set; }
 
-        [JsonProperty("category")]
-        public GemCategory Category { get; set; }
-
         [JsonProperty("inventoryId")]
         public string InventoryId { get; set; }
-
-        public class GemCategory
-        {
-            [JsonProperty("gems")]
-            public List<object> Gems { get; set; }
-        }
     }
 }

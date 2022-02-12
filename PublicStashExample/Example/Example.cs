@@ -5,8 +5,14 @@ using System.Linq;
 using System.Threading;
 using PathOfExile;
 using PathOfExile.Model;
+using PathOfExile.Model.Items;
+using PathOfExile.Model.Items.Accessories.Belts;
+using PathOfExile.Model.Items.Armours;
+using PathOfExile.Model.Items.Gems;
+using PathOfExile.Model.Items.Maps;
+using PathOfExile.Model.Items.Weapons;
 using PublicStashExample.Example.Trade;
-using Currency = PathOfExile.Model.Currency;
+using Currency = PathOfExile.Model.Items.Currencies;
 
 
 namespace PublicStashTester
@@ -26,7 +32,7 @@ namespace PublicStashTester
             // ReSharper disable once NotAccessedVariable
             var iteration = 0;
             var publicStash = PublicStashAPI.GetAsync().Result;
-            var nextChangeId = publicStash.next_change_id;
+            var nextChangeId = publicStash.NextChangeId;
             var cachedChangeId = "";
 
             for (;;)
@@ -41,7 +47,7 @@ namespace PublicStashTester
                 else
                 {
                     publicStash = PublicStashAPI.GetAsync(nextChangeId).Result;
-                    nextChangeId = publicStash.next_change_id;
+                    nextChangeId = publicStash.NextChangeId;
                     Thread.Sleep(delay);
                 }
             }
@@ -53,7 +59,7 @@ namespace PublicStashTester
             var iteration = 0;
 
             var publicStash = PublicStashAPI.GetAsync().Result;
-            var nextChangeId = publicStash.next_change_id;
+            var nextChangeId = publicStash.NextChangeId;
             var cachedChangeId = "";
 
             var armours = new List<(Armour, String)>();
@@ -75,22 +81,22 @@ namespace PublicStashTester
                     //    where !lines.Contains(missing.Buying.Texted)
                     //    select missing.Buying.Texted).ToList();
 
-                    foreach (var stash in publicStash.stashes)
+                    foreach (var stash in publicStash.Stashes)
                     {
-                        foreach (var item in stash.items)
+                        foreach (var item in stash.Items)
                         {
                             var type = item.GetType();
                             if (type == typeof(Armour))
                             {
                                 var a = (Armour) item;
 
-                                if (a.socketedItems.Any()) armours.Add((a, cachedChangeId));
+                                if (a.SocketedItems.Any()) armours.Add((a, cachedChangeId));
                             }
                             else if (type == typeof(Weapon))
                             {
                                 var w = (Weapon) item;
 
-                                if (w.socketedItems.Any()) weapons.Add((w, cachedChangeId));
+                                if (w.SocketedItems.Any()) weapons.Add((w, cachedChangeId));
                             }
                             else if (type == typeof(UnspecifiedItem))
                             {
@@ -98,7 +104,7 @@ namespace PublicStashTester
                                 var lines = File.ReadAllLines("C:/tmp/poe/missItem.txt");
                                 unspecified.Add(((UnspecifiedItem) item, cachedChangeId));
                                 File.AppendAllLines("C:/tmp/poe/missItem.txt",
-                                    new[] {$"{item.typeLine} - {cachedChangeId}"});
+                                    new[] {$"{item.TypeLine} - {cachedChangeId}"});
                             }
                         }
                     }
@@ -109,7 +115,7 @@ namespace PublicStashTester
                 else
                 {
                     publicStash = PublicStashAPI.GetAsync(nextChangeId).Result;
-                    nextChangeId = publicStash.next_change_id;
+                    nextChangeId = publicStash.NextChangeId;
                     Thread.Sleep(10000);
                 }
             }
@@ -121,7 +127,7 @@ namespace PublicStashTester
             var iteration = 0;
 
             var publicStash = PublicStashAPI.GetAsync().Result;
-            var nextChangeId = publicStash.next_change_id;
+            var nextChangeId = publicStash.NextChangeId;
             var cachedChangeId = "";
             var trader = new PoeTrader();
 
@@ -154,7 +160,7 @@ namespace PublicStashTester
                 else
                 {
                     publicStash = PublicStashAPI.GetAsync(nextChangeId).Result;
-                    nextChangeId = publicStash.next_change_id;
+                    nextChangeId = publicStash.NextChangeId;
                     Thread.Sleep(5000);
                 }
             }
@@ -172,14 +178,14 @@ namespace PublicStashTester
         {
             var list = new List<(String, Gem)>();
 
-            foreach (var stash in ps.stashes)
+            foreach (var stash in ps.Stashes)
             {
-                foreach (var item in stash.items)
+                foreach (var item in stash.Items)
                 {
                     switch (item)
                     {
                         case Gem gem when item.GetType() == typeof(Gem):
-                            if (gem.typeLine == "Ethereal Knives")
+                            if (gem.TypeLine == "Ethereal Knives")
                             {
                                 list.Add((stash.accountName, gem));
                             }
@@ -195,15 +201,15 @@ namespace PublicStashTester
         {
             var list = new List<(String, Belt)>();
 
-            foreach (var stash in ps.stashes)
+            foreach (var stash in ps.Stashes)
             {
-                foreach (var item in stash.items)
+                foreach (var item in stash.Items)
                 {
                     switch (item)
                     {
                         case Belt belt when item.GetType() == typeof(Belt):
-                            if (belt.typeLine == "Stygian Vise" &&
-                                belt.note?.IndexOf("~") >= 0)
+                            if (belt.TypeLine == "Stygian Vise" &&
+                                belt.Note?.IndexOf("~") >= 0)
                             {
                                 list.Add((stash.accountName, belt));
                             }
@@ -219,16 +225,16 @@ namespace PublicStashTester
         {
             var dict = new Dictionary<String, int>();
 
-            foreach (var stash in ps.stashes)
+            foreach (var stash in ps.Stashes)
             {
-                foreach (var item in stash.items)
+                foreach (var item in stash.Items)
                 {
                     switch (item)
                     {
-                        case Currency currency when item.GetType() == typeof(Currency):
-                            dict.TryGetValue(currency.typeLine, out var current);
-                            current += currency.stackSize;
-                            dict[currency.typeLine] = current;
+                        case Currency.Currency currency when item.GetType() == typeof(Currency.Currency):
+                            dict.TryGetValue(currency.TypeLine, out var current);
+                            current += currency.StackSize;
+                            dict[currency.TypeLine] = current;
 
                             break;
                     }
@@ -250,7 +256,7 @@ namespace PublicStashTester
                 "Shaped Arachnid Tomb Map",
             };
 
-            bool LessThenFiveC(String cond)
+            bool LessThenFifteenChaos(String cond)
             {
                 if (String.IsNullOrEmpty(cond)) return false;
 
@@ -268,15 +274,15 @@ namespace PublicStashTester
 
             var list = new List<(String, Map)>();
 
-            foreach (var stash in ps.stashes)
+            foreach (var stash in ps.Stashes)
             {
-                foreach (var item in stash.items)
+                foreach (var item in stash.Items)
                 {
                     switch (item)
                     {
                         case Map map when item.GetType() == typeof(Map):
-                            if (maps.Any(m => map.typeLine.IndexOf(m, StringComparison.Ordinal) >= 0 &&
-                                              LessThenFiveC(map.note)))
+                            if (maps.Any(m => map.TypeLine.IndexOf(m, StringComparison.Ordinal) >= 0 &&
+                                              LessThenFifteenChaos(map.Note)))
                             {
                                 list.Add((stash.accountName, map));
                             }

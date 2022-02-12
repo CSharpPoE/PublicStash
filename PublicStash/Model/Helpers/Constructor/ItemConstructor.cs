@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using PathOfExile.Model.Items;
 
@@ -10,33 +10,51 @@ namespace PathOfExile.Model.Internal
         private IParser<JObject> Parser { get; }
         private IJsonBuilder<UnspecifiedItem> UnspecifiedItemBuilder { get; }
 
-        private IDictionary<String, IJsonBuilder<Item>> Builders { get; }
+        private IDictionary<string, IJsonBuilder<Item>> Builders { get; }
 
         public ItemConstructor()
         {
             Parser = new JsonParser();
 
             UnspecifiedItemBuilder = new UnspecifiedItemBuilder();
-            Builders = new Dictionary<String, IJsonBuilder<Item>>
+            Builders = new Dictionary<string, IJsonBuilder<Item>>
             {
-                ["Currency"] = new CurrencyBuilder(),
-                ["Divination"] = new CardBuilder(),
-                ["Rings"] = new RingBuilder(),
-                ["Amulets"] = new AmuletBuilder(),
-                ["Weapons"] = new WeaponBuilder(),
-                ["Armours"] = new ArmourBuilder(),
-                ["Gems"] = new GemBuilder(),
-                ["Belts"] = new BeltBuilder(),
-                ["Jewels"] = new JewelBuilder(),
-                ["Quivers"] = new QuiverBuilder()
+                ["currency"] = new CurrencyBuilder(),
+
+                ["cards"] = new CardBuilder(),
+                
+                // Accessories
+                ["accessories"] = new AccessoryBuilder(),
+                //["rings"] = new RingBuilder(),
+                //["belts"] = new BeltBuilder(),
+                //["amulets"] = new AmuletBuilder(),
+                
+                ["weapons"] = new WeaponBuilder(),
+                
+                ["armour"] = new ArmourBuilder(),
+                
+                ["gems"] = new GemBuilder(),
+                
+                ["maps"] = new MapBuilder(),
+                
+                ["jewels"] = new JewelBuilder(),
+                
+                ["quivers"] = new QuiverBuilder(), 
             };
         }
 
         public Item ConstructFrom(JObject obj)
         {
-            return Builders.TryGetValue(Parser.Parse(obj), out var builder)
+            var res = Builders.TryGetValue(Parser.Parse(obj), out var builder)
                 ? builder.For(obj).Build()
                 : UnspecifiedItemBuilder.For(obj).Build();
+
+            //if (res == null)
+            //{
+            //    var str = $"{obj["extended"]["category"]} - {obj["baseType"]}";
+            //    Tmp.Test1.Add(str);
+            //}
+            return res;
         }
     }
 }

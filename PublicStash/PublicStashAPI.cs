@@ -13,10 +13,7 @@ namespace PathOfExile
 {
     internal class Http
     {
-        private static HttpClient _client;
-
-        internal static HttpClient Instance { get; } =
-            _client ?? (_client = new HttpClient());
+        internal static HttpClient Instance { get; } =new HttpClient();
     }
 
     /// <summary>
@@ -34,9 +31,7 @@ namespace PathOfExile
         /// </summary>
         private static readonly IEnumerable<String> POE_API_LATEST_CHANGE_ID_URL = new[]
         {
-            "https://poe.ninja/api/Data/GetStats",
-            "http://api.poe.ovh/ChangeID",
-            "http://poe-rates.com/actions/getLastChangeId.php"
+            "https://poe.ninja/api/Data/GetStats"
         };
 
         private static readonly JsonSerializerSettings DefaultResolver = new JsonSerializerSettings
@@ -58,7 +53,7 @@ namespace PathOfExile
                     if (init)
                     {
                         publicStash = GetAsync().Result;
-                        nextChangeId = publicStash.next_change_id;
+                        nextChangeId = publicStash.NextChangeId;
                         cachedChangeId = "";
                         init = false;
                     }
@@ -72,7 +67,7 @@ namespace PathOfExile
                     else
                     {
                         publicStash = GetAsync(nextChangeId).Result;
-                        nextChangeId = publicStash.next_change_id;
+                        nextChangeId = publicStash.NextChangeId;
                         new ManualResetEvent(false).WaitOne(Math.Max(0,
                             delay - (int) (DateTime.UtcNow - Start).TotalMilliseconds));
                     }

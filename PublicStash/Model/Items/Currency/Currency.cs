@@ -23,15 +23,6 @@ namespace PathOfExile.Model.Items.Currencies
 
         [JsonProperty("inventoryId")]
         public string InventoryId { get; set; }
-
-        [JsonProperty("category")]
-        public CurrencyCategory Category { get; set; }
-
-        public class CurrencyCategory
-        {
-            [JsonProperty("currency")]
-            public List<object> Currency { get; set; }
-        }
     }
 
     [Currency("Albino Rhoa Feather")]
@@ -202,6 +193,11 @@ namespace PathOfExile.Model.Items.Currencies
 
     [Currency("Vaal Orb")]
     public class VaalOrb : Currency
+    {
+    }
+
+    [Currency("Simulacrum Splinter")]
+    public class SimulacrumSplinter : Currency
     {
     }
 }

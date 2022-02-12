@@ -7,7 +7,7 @@ namespace PathOfExile.Model.Items
     internal interface Socketable
     {
         [JsonProperty("sockets")]
-        IEnumerable<Item.Socket> Sockets { get; set; }
+        IEnumerable<Socket> Sockets { get; set; }
 
         [JsonProperty("socketedItems")]
         [JsonConverter(typeof(SocketedItemConverter))]

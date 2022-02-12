@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using PathOfExile.Model.Internal;
 
-namespace PathOfExile.Model.Items.Belts
+namespace PathOfExile.Model.Items.Accessories.Belts
 {
-    public abstract class Belt : Item
+    public abstract class Belt : Accessory
     {
     }
 

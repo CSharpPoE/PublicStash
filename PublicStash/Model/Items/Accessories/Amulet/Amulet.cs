@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using PathOfExile.Model.Internal;
 
-namespace PathOfExile.Model.Items.Amulets
+namespace PathOfExile.Model.Items.Accessories.Amulets
 {
-    public abstract class Amulet : Item
+    public abstract class Amulet : Accessory
     {
     }
 
@@ -70,6 +70,11 @@ namespace PathOfExile.Model.Items.Amulets
 
     [Amulet("Blue Pearl Amulet")]
     public class BluePearlAmulet : Amulet
+    {
+    }
+
+    [Amulet("Seaglass Amulet")]
+    public class SeaglassAmulet : Amulet
     {
     }
 

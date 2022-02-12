@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PathOfExile.Model
 {
     public class PublicStash
     {
-        public string next_change_id { get; set; }
-        public IEnumerable<Stash> stashes { get; set; }
+        [JsonProperty("next_change_id")]
+        public string NextChangeId { get; set; }
+
+        [JsonProperty("stashes")]
+        public IEnumerable<PublicStashChange> Stashes { get; set; }
     }
 }

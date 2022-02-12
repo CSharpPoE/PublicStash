@@ -6,12 +6,6 @@ namespace PathOfExile.Model.Items.Quivers
 {
     public abstract class Quiver : Item
     {
-        public class QuiverCategory
-        {
-            [JsonProperty("armour")]
-            public IEnumerable<string> Armour { get; set; }
-        }
-
         [JsonProperty("properties")]
         public IEnumerable<Property> Properties { get; set; }
 
@@ -29,9 +23,6 @@ namespace PathOfExile.Model.Items.Quivers
 
         [JsonProperty("inventoryId")]
         public string InventoryId { get; set; }
-
-        [JsonProperty("category")]
-        public QuiverCategory Category { get; set; }
 
         [JsonProperty("elder")]
         public bool Elder { get; set; }

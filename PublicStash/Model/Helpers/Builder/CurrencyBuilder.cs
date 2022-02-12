@@ -4,7 +4,7 @@ namespace PathOfExile.Model.Internal
 {
     internal class CurrencyBuilder : TBuilder<Currency>
     {
-        public CurrencyBuilder() : base(new TypeLineParser(), AttributeHelper.Index<CurrencyAttribute>())
+        public CurrencyBuilder() : base(new BaseTypeParser(), AttributeHelper.Index<CurrencyAttribute>())
         {
         }
     }

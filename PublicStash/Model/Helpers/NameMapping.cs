@@ -1,11 +1,10 @@
-﻿using System;
-
+﻿
 namespace PathOfExile.Model.Internal
 {
-    class NameMapping
+    public class NameMapping
     {
-        internal const String ArmourEnergyShieldTwoTonedBoots = nameof(ArmourEnergyShieldTwoTonedBoots);
-        internal const String ArmourEvasionTwoTonedBoots = nameof(ArmourEvasionTwoTonedBoots);
-        internal const String EnergyShieldEvasionTwoTonedBoots = nameof(EnergyShieldEvasionTwoTonedBoots);
+        internal const string ArmourEnergyShieldTwoTonedBoots = nameof(ArmourEnergyShieldTwoTonedBoots);
+        internal const string ArmourEvasionTwoTonedBoots = nameof(ArmourEvasionTwoTonedBoots);
+        internal const string EnergyShieldEvasionTwoTonedBoots = nameof(EnergyShieldEvasionTwoTonedBoots);
     }
 }

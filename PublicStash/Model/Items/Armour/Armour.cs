@@ -5,12 +5,6 @@ namespace PathOfExile.Model.Items.Armours
 {
     public abstract class Armour : Item, Socketable
     {
-        public class ArmourCategory
-        {
-            [JsonProperty("armour")]
-            public IEnumerable<string> Armour { get; set; }
-        }
-
         [JsonProperty("properties")]
         public IEnumerable<Property> Properties { get; set; }
 
@@ -25,9 +19,6 @@ namespace PathOfExile.Model.Items.Armours
 
         [JsonProperty("inventoryId")]
         public string InventoryId { get; set; }
-
-        [JsonProperty("category")]
-        public ArmourCategory Category { get; set; }
 
         [JsonProperty("elder")]
         public bool Elder { get; set; }

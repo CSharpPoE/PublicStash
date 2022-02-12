@@ -24,17 +24,8 @@ namespace PathOfExile.Model.Items.Cards
         [JsonProperty("artFilename")]
         public string ArtFilename { get; set; }
 
-        [JsonProperty("category")]
-        public CardCategory Category { get; set; }
-
         [JsonProperty("inventoryId")]
         public string InventoryId { get; set; }
-
-        public class CardCategory
-        {
-            [JsonProperty("cards")]
-            public List<object> Cards { get; set; }
-        }
     }
 
     [Card("A Mother's Parting Gift")]

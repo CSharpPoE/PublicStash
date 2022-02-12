@@ -14,27 +14,6 @@ namespace PathOfExile.Model.Items.Jewels
 
         [JsonProperty("inventoryId")]
         public string InventoryId { get; set; }
-
-        [JsonProperty("category")]
-        public JewelCategory Category { get; set; }
-
-        public class JewelCategory
-        {
-            [JsonProperty("jewels")]
-            public List<object> Jewels { get; set; }
-        }
-    }
-
-    public abstract class AbyssJewel : Jewel
-    {
-        [JsonProperty("abyss")]
-        public bool Abyss { get; set; }
-
-        [JsonProperty("properties")]
-        public IEnumerable<Property> Properties { get; set; }
-
-        [JsonProperty("requirements")]
-        public IEnumerable<Requirement> Requirements { get; set; }
     }
 
     #region Regular
@@ -56,30 +35,6 @@ namespace PathOfExile.Model.Items.Jewels
 
     #endregion
 
-
-    #region Abyss
-
-    [AbyssJewel("Ghastly Eye Jewel")]
-    public class GhastlyEyeJewel : AbyssJewel
-    {
-    }
-
-    [AbyssJewel("Hypnotic Eye Jewel")]
-    public class HypnoticEyeJewel : AbyssJewel
-    {
-    }
-
-    [AbyssJewel("Murderous Eye Jewel")]
-    public class MurderousEyeJewel : AbyssJewel
-    {
-    }
-
-    [AbyssJewel("Searching Eye Jewel")]
-    public class SearchingEyeJewel : AbyssJewel
-    {
-    }
-
-    #endregion
 
     #region Disabled
 

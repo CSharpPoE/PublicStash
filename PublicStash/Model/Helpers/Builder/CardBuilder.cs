@@ -4,7 +4,7 @@ namespace PathOfExile.Model.Internal
 {
     internal class CardBuilder : TBuilder<Card>
     {
-        public CardBuilder() : base(new TypeLineParser(), AttributeHelper.Index<CardAttribute>())
+        public CardBuilder() : base(new BaseTypeParser(), AttributeHelper.Index<CardAttribute>())
         {
         }
     }

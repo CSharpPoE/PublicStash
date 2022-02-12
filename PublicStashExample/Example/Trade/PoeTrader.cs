@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using PathOfExile.Model;
-using PoECurrency = PathOfExile.Model.Currency;
+using PoECurrency = PathOfExile.Model.Items.Currencies.Currency;
 
 namespace PublicStashExample.Example.Trade
 {
@@ -19,21 +19,21 @@ namespace PublicStashExample.Example.Trade
         {
             var prices = new List<Price>();
 
-            foreach (var stash in ps.stashes)
+            foreach (var stash in ps.Stashes)
             {
-                foreach (var item in stash.items)
+                foreach (var item in stash.Items)
                 {
                     switch (item)
                     {
-                        case PoECurrency curr when item.note != null &&
+                        case PoECurrency curr when item.Note != null &&
                                                    item.GetType() ==
                                                    typeof(PoECurrency):
 
                             foreach (var query in matches)
                             {
-                                if (curr.note?.IndexOf(query) >= 0)
+                                if (curr.Note?.IndexOf(query) >= 0)
                                 {
-                                    var matchedText = Regex.Matches(curr.note, $@"^{query}[0-9//]+ [\w-]+")
+                                    var matchedText = Regex.Matches(curr.Note, $@"^{query}[0-9//]+ [\w-]+")
                                         .Cast<Match>()
                                         .Select(m => m.Value)
                                         .ToArray();
@@ -56,26 +56,26 @@ namespace PublicStashExample.Example.Trade
 
 
                                             var price = new Price(
-                                                new Seller(stash.accountName, stash.lastCharacterName, curr.league),
+                                                new Seller(stash.accountName, stash.lastCharacterName, curr.League),
                                                 decimal.Divide(
                                                     decimal.Parse(decimalPrice[1]),
                                                     decimal.Parse(decimalPrice[0])),
-                                                $"Selling {decimalPrice[1]} {curr.typeLine} for {decimalPrice[0]} {parsedCurrency[1]}",
+                                                $"Selling {decimalPrice[1]} {curr.TypeLine} for {decimalPrice[0]} {parsedCurrency[1]}",
                                                 matchedText[0],
-                                                new Sell(curr.typeLine, int.Parse(decimalPrice[1])),
+                                                new Sell(curr.TypeLine, int.Parse(decimalPrice[1])),
                                                 new Buy(parsedCurrency[1], int.Parse(decimalPrice[0])));
                                             prices.Add(price);
                                         }
                                         else
                                         {
                                             var price = new Price(
-                                                new Seller(stash.accountName, stash.lastCharacterName, curr.league),
+                                                new Seller(stash.accountName, stash.lastCharacterName, curr.League),
                                                 decimal.Parse(parsedCurrency[0]),
-                                                $"Selling {curr.stackSize} {curr.typeLine} for {int.Parse(parsedCurrency[0]) * curr.stackSize} {parsedCurrency[1]}",
+                                                $"Selling {curr.StackSize} {curr.TypeLine} for {int.Parse(parsedCurrency[0]) * curr.StackSize} {parsedCurrency[1]}",
                                                 matchedText[0],
-                                                new Sell(curr.typeLine, curr.stackSize),
+                                                new Sell(curr.TypeLine, curr.StackSize),
                                                 new Buy(parsedCurrency[1],
-                                                    curr.stackSize * int.Parse(parsedCurrency[0])));
+                                                    curr.StackSize * int.Parse(parsedCurrency[0])));
                                             prices.Add(price);
                                         }
                                     }

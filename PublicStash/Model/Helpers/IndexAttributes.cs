@@ -6,20 +6,20 @@ namespace PathOfExile.Model.Internal
 {
     public static class AttributeHelper
     {
-        private static IDictionary<Type, IDictionary<String, Type>> IndexCache { get; }
+        private static IDictionary<Type, IDictionary<string, Type>> IndexCache { get; }
 
-        static AttributeHelper() => IndexCache = new Dictionary<Type, IDictionary<String, Type>>();
+        static AttributeHelper() => IndexCache = new Dictionary<Type, IDictionary<string, Type>>();
 
-        internal static IDictionary<String, Type> Index<T>() where T : ItemAttribute
+        internal static IDictionary<string, Type> Index<T>() where T : ItemAttribute
         {
             if (IndexCache.TryGetValue(typeof(T), out var dict)) return dict;
-            var typeDict = new Dictionary<String, Type>();
+            var typeDict = new Dictionary<string, Type>();
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 foreach (var type in assembly.GetTypes())
                 {
                     var value = type.GetCustomAttribute<T>()?.Value;
-                    if (!String.IsNullOrEmpty(value))
+                    if (!string.IsNullOrEmpty(value))
                     {
                         typeDict.Add(value, type);
                     }
@@ -34,9 +34,9 @@ namespace PathOfExile.Model.Internal
     [AttributeUsage(AttributeTargets.Class)]
     internal class ItemAttribute : Attribute
     {
-        public String Value { get; }
+        public string Value { get; }
 
-        protected ItemAttribute(String value)
+        protected ItemAttribute(string value)
         {
             Value = value;
         }
@@ -230,9 +230,18 @@ namespace PathOfExile.Model.Internal
 
     #endregion
 
+    #region Accessory
+
+    internal class AccessoryAttribute : ItemAttribute
+    {
+        protected AccessoryAttribute(string value) : base(value)
+        {
+        }
+    }
+
     #region Ring
 
-    internal class RingAttribute : ItemAttribute
+    internal class RingAttribute : AccessoryAttribute
     {
         public RingAttribute(string value) : base(value)
         {
@@ -241,9 +250,20 @@ namespace PathOfExile.Model.Internal
 
     #endregion
 
+    #region Belt
+
+    internal class BeltAttribute : AccessoryAttribute
+    {
+        public BeltAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    #endregion
+
     #region Amulet
 
-    internal class AmuletAttribute : ItemAttribute
+    internal class AmuletAttribute : AccessoryAttribute
     {
         public AmuletAttribute(string value) : base(value)
         {
@@ -256,6 +276,8 @@ namespace PathOfExile.Model.Internal
         {
         }
     }
+
+    #endregion
 
     #endregion
 
@@ -588,17 +610,6 @@ namespace PathOfExile.Model.Internal
 
     #endregion
 
-    #region Belt
-
-    internal class BeltAttribute : ItemAttribute
-    {
-        public BeltAttribute(string value) : base(value)
-        {
-        }
-    }
-
-    #endregion
-
     #region Jewel
 
     internal class JewelAttribute : ItemAttribute
@@ -611,6 +622,13 @@ namespace PathOfExile.Model.Internal
     internal class AbyssJewelAttribute : JewelAttribute
     {
         public AbyssJewelAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    internal class ClusterJewelAttribute : JewelAttribute
+    {
+        public ClusterJewelAttribute(string value) : base(value)
         {
         }
     }
@@ -628,19 +646,46 @@ namespace PathOfExile.Model.Internal
 
     #endregion
 
-
     #region Map
 
     internal class MapAttribute : ItemAttribute
     {
-        protected MapAttribute(string value) : base(value)
+        public MapAttribute(string value) : base(value)
         {
         }
     }
 
-    internal class BetrayalMapAttribute : MapAttribute
+    internal class BlightMapAttribute : MapAttribute
     {
-        public BetrayalMapAttribute(string value) : base(value)
+        public BlightMapAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    internal class ScarabAttribute : MapAttribute
+    {
+        public ScarabAttribute(string value) : base(value)
+        {
+        }
+    }    
+    
+    internal class BreachstoneAttribute : MapAttribute
+    {
+        public BreachstoneAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    internal class LegionEmblemAttribute : MapAttribute
+    {
+        public LegionEmblemAttribute(string value) : base(value)
+        {
+        }
+    }
+
+    internal class InvitationAttribute : MapAttribute
+    {
+        public InvitationAttribute(string value) : base(value)
         {
         }
     }
